@@ -9,5 +9,4 @@ The project is driven by a multiprofessiona team of researchers from the Center 
 
 Contact us at:   
 [Twitter: @NOIS_PUCRio](https://twitter.com/NOIS_PUCRio)  
-effectbrazil [at] puc-rio [dot] br  
-nois.puc [at] gmail [dot] com
+nois [at] puc-rio [dot] br  
