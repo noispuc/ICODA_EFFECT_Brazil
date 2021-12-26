@@ -62,9 +62,34 @@ ui <- fluidPage(
                                                  style = 'minimal',
                                                  size = 'sm')),
                                   
-                                  img(src = '210812_Logo Lockup_IG2.jpg'
-                                )
-                      )
+                                  tags$div(style = "display:inherit; padding-top:3%; text-align:center;",
+                                    ## Twitter
+                                    actionButton(inputId = "twitter_share",
+                                                 label = "",
+                                                 icon = icon("twitter"),
+                                                 style = "background-color:#1DA1F2; border-color:#1DA1F2",
+                                                 onclick = sprintf("window.open('%s')", "https://twitter.com/intent/tweet?url=https://jessicavillar.shinyapps.io/icoda/")),
+
+                                    ## Facebook
+                                    actionButton(inputId = "facebook_share",
+                                                 label = "",
+                                                 icon = icon("facebook"),
+                                                 style = "background-color:#4267B2; border-color:#4267B2",
+                                                 onclick = sprintf("window.open('%s')", "https://www.facebook.com/sharer/sharer.php?u=https://jessicavillar.shinyapps.io/icoda/")),
+                                    
+
+                                    ## LinkedIn
+                                    actionButton(inputId = "linkedin_share",
+                                                 label = "",
+                                                 icon = icon("linkedin"),
+                                                 style = "background-color:#0e76a8; border-color:#0e76a8",
+                                                 onclick = sprintf("window.open('%s')", "https://www.linkedin.com/shareArticle?mini=true&url=https://jessicavillar.shinyapps.io/icoda/")),
+                                    br(),
+                                    img(src = '210812_Logo Lockup_IG2.jpg')
+                                    )
+                                    
+                                  
+                      ),
              ),
              
              
