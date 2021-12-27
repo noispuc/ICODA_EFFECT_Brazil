@@ -33,7 +33,9 @@ create_covid_map <- function(df, input_date, input_metric) {
             aes_string(fill = input_metric), 
             color = NA) +
     labs(title = titulo_map, 
-         size = 15) +
+         size = 15,
+         caption="Fonte: Dados de https://github.com/wcota/covid19br",
+         size=15) +
     scale_fill_distiller(palette = 'BuPu',
                          direction = 1) +
     theme_minimal() +
@@ -61,6 +63,8 @@ create_sociodem_map <- function(metric){
     geom_sf(data = all_muni, aes_string(fill = metric), 
             color = NA) +
     labs(title = titulo_map, 
+         size=15,
+         caption="Fonte: Dados do IBGE e DataSUS",
          size=15) +
     scale_fill_distiller(palette = 'YlOrBr',
                          direction = 1) +
