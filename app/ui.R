@@ -160,6 +160,20 @@ ui <- fluidPage(
                                              value = 7)),
                         ),
                         
+                        # criando botão para download .csv
+                        downloadButton( outputId = "downloadDataCases",
+                                        label = "Download .csv",
+                                        icon = icon("download"),
+                                        style = "color: black; margin-left: 15px; margin-bottom: 5px;"),
+                      
+                        # criando referência bibliográfica  
+                          h6('Fonte: COTA, W. Monitoramento contínuo da COVID-19 no Brasil: coleta, análise e modelagem de dados epidêmicos, Banco de Dados, Projeto de Pós-Doutorado, Universidade Federal de Viçosa.
+                             Disponível em:',
+                             style='margin-top:0px;'),
+                          
+                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
+                        ),
+                        
                         # painel principal para apresentar outputs
                         mainPanel(dygraphOutput(outputId = 'cases_plot'))
                         
@@ -187,15 +201,6 @@ ui <- fluidPage(
                           
                           
                           splitLayout(cellWidths = c('50%', '50%'),
-                                      # criando filtro de data
-                                      sliderInput(inputId = 'cases_date2',
-                                                  'Arraste para selecionar a data:',
-                                                  min = as.Date(min(cases_Brazil$date),'%Y-%m-%d'),
-                                                  max = as.Date(max(cases_Brazil$date),'%Y-%m-%d'),
-                                                  value=as.Date(max(cases_Brazil$date)),
-                                                  timeFormat='%d-%m-%Y')),
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'cases_metric2',
                                                      label = 'Escolha a métrica (por Estado):',
@@ -204,6 +209,7 @@ ui <- fluidPage(
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3),
+                                      
                                       
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'demographic_metric1',
@@ -214,6 +220,22 @@ ui <- fluidPage(
                                                      selectize = FALSE,
                                                      size = 3,
                                                      width = '110%')),
+                          
+                          splitLayout(cellWidths = c('50%', '50%'),
+                                      # criando filtro de data
+                                      sliderInput(inputId = 'cases_date2',
+                                                  'Arraste para selecionar a data:',
+                                                  min = as.Date(min(cases_Brazil$date),'%Y-%m-%d'),
+                                                  max = as.Date(max(cases_Brazil$date),'%Y-%m-%d'),
+                                                  value=as.Date(max(cases_Brazil$date)),
+                                                  timeFormat='%d-%m-%Y'),
+                                      
+                                      # criando botão de download da base de dados
+                                      downloadButton(
+                                        outputId = "downloadDataSocioDem1",
+                                        label = "Download .csv",
+                                        icon = icon("download"),
+                                        style = "color: black; margin-left: 15px; margin-bottom: 5px;" )),
                           
                           splitLayout(cellWidths = c('50%', '50%'),
                                       plotOutput(outputId = 'cases_map'),
@@ -290,7 +312,21 @@ ui <- fluidPage(
                                              min = 1,
                                              max = 14,
                                              value = 7)),
+                          
+                           # criando botão para download .csv
+                        downloadButton( outputId = "downloadDataDeaths",
+                                        label = "Download .csv",
+                                        icon = icon("download"),
+                                        style = "color: black; margin-left: 15px; margin-bottom: 5px;"),
+                      
+                        # criando referência bibliográfica  
+                          h6('Fonte: COTA, W. Monitoramento contínuo da COVID-19 no Brasil: coleta, análise e modelagem de dados epidêmicos, Banco de Dados, Projeto de Pós-Doutorado, Universidade Federal de Viçosa.
+                             Disponível em:',
+                             style='margin-top:0px;'),
+                          
+                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
                         ),
+                        
                         
                         # painel principal para apresentar outputs
                         mainPanel(dygraphOutput(outputId = 'deaths_plot'))
@@ -318,14 +354,6 @@ ui <- fluidPage(
                           
                           splitLayout(cellWidths = c('50%', '50%'),
                                       # criando filtro de data
-                                      sliderInput(inputId = 'deaths_date2',
-                                                  'Arraste para selecionar a data:',
-                                                  min = as.Date(min(deaths_Brazil$date),'%Y-%m-%d'),
-                                                  max = as.Date(max(deaths_Brazil$date),'%Y-%m-%d'),
-                                                  value=as.Date(max(deaths_Brazil$date)),
-                                                  timeFormat='%d-%m-%Y')),
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'deaths_metric2',
                                                      label = 'Escolha a métrica (por Estado):',
@@ -344,6 +372,22 @@ ui <- fluidPage(
                                                      selectize = FALSE,
                                                      size = 3,
                                                      width = '110%')),
+                          
+                          splitLayout(cellWidths = c('50%', '50%'),
+                                      # criando filtro de data
+                                      sliderInput(inputId = 'deaths_date2',
+                                                  'Arraste para selecionar a data:',
+                                                  min = as.Date(min(deaths_Brazil$date),'%Y-%m-%d'),
+                                                  max = as.Date(max(deaths_Brazil$date),'%Y-%m-%d'),
+                                                  value=as.Date(max(deaths_Brazil$date)),
+                                                  timeFormat='%d-%m-%Y'),
+                                      
+                                      # criando botão de download da base de dados
+                                      downloadButton(
+                                        outputId = "downloadDataSocioDem2",
+                                        label = "Download .csv",
+                                        icon = icon("download"),
+                                        style = "color: black; margin-left: 15px; margin-bottom: 5px;")),
                           
                           splitLayout(cellWidths = c('50%', '50%'),
                                       plotOutput(outputId = 'deaths_map'),
@@ -405,6 +449,20 @@ ui <- fluidPage(
                                       selected = 'RJ')
                         ),
                         
+                        # criando botão para download .csv
+                        downloadButton( outputId = "downloadDataVaccionation",
+                                        label = "Download .csv",
+                                        icon = icon("download"),
+                                        style = "color: black; margin-left: 15px; margin-bottom: 5px;"),
+                      
+                        # criando referência bibliográfica  
+                          h6('Fonte: COTA, W. Monitoramento contínuo da COVID-19 no Brasil: coleta, análise e modelagem de dados epidêmicos, Banco de Dados, Projeto de Pós-Doutorado, Universidade Federal de Viçosa.
+                             Disponível em:',
+                             style='margin-top:0px;'),
+                          
+                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
+                        ),
+                        
                         # painel principal para apresentar outputs
                         mainPanel(dygraphOutput(outputId = 'vaccination_plot'))
                         
@@ -433,33 +491,41 @@ ui <- fluidPage(
                           
                           
                           splitLayout(cellWidths = c('50%', '50%'),
-                                      # criando filtro de data
+                                      # criando caixa de selecao de variavel plotada
+                                      varSelectInput(inputId = 'vaccination_metric2',
+                                                     label = 'Escolha a métrica (por Estado):',
+                                                     data = vacinacao_colunas, 
+                                                     selected = 'Vacinados com 1a dose',
+                                                     multiple = FALSE,
+                                                     selectize = FALSE,
+                                                     size = 3),
+                                      
+                                      
+                                      # criando caixa de selecao de variavel plotada
+                                      varSelectInput(inputId = 'demographic_metric4',
+                                                     label = 'Escolha a métrica (por Município):',
+                                                     data = sociodem_colunas, 
+                                                     selected = 'PIB per capita',
+                                                     multiple = FALSE,
+                                                     selectize = FALSE,
+                                                     size = 3,
+                                                     width = '110%')),
+                          
+                          splitLayout(cellWidths = c('50%', '50%'),
+                                     # criando filtro de data
                                       sliderInput(inputId = 'vaccination_date2',
                                                   'Arraste para selecionar a data:',
                                                   min = as.Date(min(vaccination_Brazil$date),'%Y-%m-%d'),
                                                   max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
                                                   value=as.Date(max(vaccination_Brazil$date)),
-                                                  timeFormat='%d-%m-%Y')),
+                                                  timeFormat='%d-%m-%Y'),
+                                      
                           
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                     # criando caixa de selecao de variavel plotada
-                                     varSelectInput(inputId = 'vaccination_metric2',
-                                                    label = 'Escolha a métrica (por Estado):',
-                                                    data = vacinacao_colunas, 
-                                                    selected = 'Vacinados com 1a dose',
-                                                    multiple = FALSE,
-                                                    selectize = FALSE,
-                                                    size = 3),
-                                     
-                                     # criando caixa de selecao de variavel plotada
-                                     varSelectInput(inputId = 'demographic_metric4',
-                                                    label = 'Escolha a métrica (por Município):',
-                                                    data = sociodem_colunas, 
-                                                    selected = 'PIB per capita',
-                                                    multiple = FALSE,
-                                                    selectize = FALSE,
-                                                    size = 3,
-                                                    width = '110%')),
+                                    # criando botão de download da base de dados
+                                    downloadButton( outputId = "downloadDataSocioDem3",
+                                                    label = "Download .csv",
+                                                    icon = icon("download"),
+                                                    style = "color: black; margin-left: 15px; margin-bottom: 5px;")),
                          
                          splitLayout(cellWidths = c('50%', '50%'),
                                      plotOutput(outputId = 'vaccination_map'),
