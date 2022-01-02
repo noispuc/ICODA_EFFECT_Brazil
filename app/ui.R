@@ -16,79 +16,79 @@ ui <- fluidPage(
                                                   h4('[Breve descrição do app]', 
                                                      style='margin-top:0px;'))
                                   )
-                                  )
-                                ),
-                                
-                                br(),
-                                
-                                fluidRow(
-                                  box(title = 'Casos', 
-                                      width = 3, 
-                                      background = 'blue',
-                                      'Explore dados sobre os casos confirmados de COVID-19',
-                                      br(),
-                                      actionBttn(inputId = 'switch_tab_cases',
-                                                 label = 'Acessar página',
-                                                 style = 'minimal',
-                                                 size = 'sm')),
-                                  
-                                  box(title = 'Óbitos', 
-                                      width = 3, 
-                                      background = 'yellow',
-                                      'Explore dados sobre os óbitos confirmados de COVID-19',
-                                      br(),
-                                      actionBttn(inputId = 'switch_tab_deaths',
-                                                 label = 'Acessar página',
-                                                 style = 'minimal',
-                                                 size = 'sm')),
-                                  
-                                  box(title = 'Hospitalizações', 
-                                      width = 3, 
-                                      background = 'red',
-                                      'Explore dados sobre as hospitalizações de COVID-19',
-                                      br(),
-                                      actionBttn(inputId = 'switch_tab_hospitalization',
-                                                 label = 'Acessar página',
-                                                 style = 'minimal',
-                                                 size = 'sm')),
-                                  
-                                  box(title = 'Vacinação', 
-                                      width = 3, 
-                                      background = 'navy',
-                                      'Explore dados sobre a vacinação contra a COVID-19',
-                                      br(),
-                                      actionBttn(inputId = 'switch_tab_vaccination',
-                                                 label = 'Acessar página',
-                                                 style = 'minimal',
-                                                 size = 'sm')),
-                                  
-                                  tags$div(style = "display:inherit; padding-top:3%; text-align:center;",
-                                    ## Twitter
-                                    actionButton(inputId = "twitter_share",
-                                                 label = "",
-                                                 icon = icon("twitter"),
-                                                 style = "background-color:#1DA1F2; border-color:#1DA1F2",
-                                                 onclick = sprintf("window.open('%s')", "https://twitter.com/intent/tweet?url=https://jessicavillar.shinyapps.io/icoda/")),
-
-                                    ## Facebook
-                                    actionButton(inputId = "facebook_share",
-                                                 label = "",
-                                                 icon = icon("facebook"),
-                                                 style = "background-color:#4267B2; border-color:#4267B2",
-                                                 onclick = sprintf("window.open('%s')", "https://www.facebook.com/sharer/sharer.php?u=https://jessicavillar.shinyapps.io/icoda/")),
-                                    
-
-                                    ## LinkedIn
-                                    actionButton(inputId = "linkedin_share",
-                                                 label = "",
-                                                 icon = icon("linkedin"),
-                                                 style = "background-color:#0e76a8; border-color:#0e76a8",
-                                                 onclick = sprintf("window.open('%s')", "https://www.linkedin.com/shareArticle?mini=true&url=https://jessicavillar.shinyapps.io/icoda/")),
-                                    br(),
-                                    img(src = '210812_Logo Lockup_IG2.jpg')
-                                    )
-                                    
-                                  
+                                )
+                      ),
+                      
+                      br(),
+                      
+                      fluidRow(
+                        box(title = 'Casos', 
+                            width = 3, 
+                            background = 'blue',
+                            'Explore dados sobre os casos confirmados de COVID-19',
+                            br(),
+                            actionBttn(inputId = 'switch_tab_cases',
+                                       label = 'Acessar página',
+                                       style = 'minimal',
+                                       size = 'sm')),
+                        
+                        box(title = 'Óbitos', 
+                            width = 3, 
+                            background = 'yellow',
+                            'Explore dados sobre os óbitos confirmados de COVID-19',
+                            br(),
+                            actionBttn(inputId = 'switch_tab_deaths',
+                                       label = 'Acessar página',
+                                       style = 'minimal',
+                                       size = 'sm')),
+                        
+                        box(title = 'Hospitalizações', 
+                            width = 3, 
+                            background = 'red',
+                            'Explore dados sobre as hospitalizações de COVID-19',
+                            br(),
+                            actionBttn(inputId = 'switch_tab_hospitalization',
+                                       label = 'Acessar página',
+                                       style = 'minimal',
+                                       size = 'sm')),
+                        
+                        box(title = 'Vacinação', 
+                            width = 3, 
+                            background = 'navy',
+                            'Explore dados sobre a vacinação contra a COVID-19',
+                            br(),
+                            actionBttn(inputId = 'switch_tab_vaccination',
+                                       label = 'Acessar página',
+                                       style = 'minimal',
+                                       size = 'sm')),
+                        
+                        tags$div(style = "display:inherit; padding-top:3%; text-align:center;",
+                                 ## Twitter
+                                 actionButton(inputId = "twitter_share",
+                                              label = "",
+                                              icon = icon("twitter"),
+                                              style = "background-color:#1DA1F2; border-color:#1DA1F2",
+                                              onclick = sprintf("window.open('%s')", "https://twitter.com/intent/tweet?url=https://noispuc.shinyapps.io/effect-br-monitor/")),
+                                 
+                                 ## Facebook
+                                 actionButton(inputId = "facebook_share",
+                                              label = "",
+                                              icon = icon("facebook"),
+                                              style = "background-color:#4267B2; border-color:#4267B2",
+                                              onclick = sprintf("window.open('%s')", "https://www.facebook.com/sharer/sharer.php?u=https://noispuc.shinyapps.io/effect-br-monitor/")),
+                                 
+                                 
+                                 ## LinkedIn
+                                 actionButton(inputId = "linkedin_share",
+                                              label = "",
+                                              icon = icon("linkedin"),
+                                              style = "background-color:#0e76a8; border-color:#0e76a8",
+                                              onclick = sprintf("window.open('%s')", "https://www.linkedin.com/shareArticle?mini=true&url=https://noispuc.shinyapps.io/effect-br-monitor/")),
+                                 br(),
+                                 img(src = '210812_Logo Lockup_IG2.jpg')
+                        )
+                        
+                        
                       ),
              ),
              
@@ -160,19 +160,6 @@ ui <- fluidPage(
                                              value = 7)),
                         ),
                         
-                        # criando botão para download .csv
-                        downloadButton( outputId = "downloadDataCases",
-                                        label = "Download .csv",
-                                        icon = icon("download"),
-                                        style = "color: black; margin-left: 15px; margin-bottom: 5px;"),
-                      
-                        # criando referência bibliográfica  
-                          h6('Fonte: COTA, W. Monitoramento contínuo da COVID-19 no Brasil: coleta, análise e modelagem de dados epidêmicos, Banco de Dados, Projeto de Pós-Doutorado, Universidade Federal de Viçosa.
-                             Disponível em:',
-                             style='margin-top:0px;'),
-                          
-                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
-                        ),
                         
                         # painel principal para apresentar outputs
                         mainPanel(dygraphOutput(outputId = 'cases_plot'))
@@ -201,6 +188,15 @@ ui <- fluidPage(
                           
                           
                           splitLayout(cellWidths = c('50%', '50%'),
+                                      # criando filtro de data
+                                      sliderInput(inputId = 'cases_date2',
+                                                  'Arraste para selecionar a data:',
+                                                  min = as.Date(min(cases_Brazil$date),'%Y-%m-%d'),
+                                                  max = as.Date(max(cases_Brazil$date),'%Y-%m-%d'),
+                                                  value=as.Date(max(cases_Brazil$date)),
+                                                  timeFormat='%d-%m-%Y')),
+                          
+                          splitLayout(cellWidths = c('50%', '50%'),
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'cases_metric2',
                                                      label = 'Escolha a métrica (por Estado):',
@@ -209,7 +205,6 @@ ui <- fluidPage(
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3),
-                                      
                                       
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'demographic_metric1',
@@ -220,22 +215,6 @@ ui <- fluidPage(
                                                      selectize = FALSE,
                                                      size = 3,
                                                      width = '110%')),
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      # criando filtro de data
-                                      sliderInput(inputId = 'cases_date2',
-                                                  'Arraste para selecionar a data:',
-                                                  min = as.Date(min(cases_Brazil$date),'%Y-%m-%d'),
-                                                  max = as.Date(max(cases_Brazil$date),'%Y-%m-%d'),
-                                                  value=as.Date(max(cases_Brazil$date)),
-                                                  timeFormat='%d-%m-%Y'),
-                                      
-                                      # criando botão de download da base de dados
-                                      downloadButton(
-                                        outputId = "downloadDataSocioDem1",
-                                        label = "Download .csv",
-                                        icon = icon("download"),
-                                        style = "color: black; margin-left: 15px; margin-bottom: 5px;" )),
                           
                           splitLayout(cellWidths = c('50%', '50%'),
                                       plotOutput(outputId = 'cases_map'),
@@ -312,21 +291,7 @@ ui <- fluidPage(
                                              min = 1,
                                              max = 14,
                                              value = 7)),
-                          
-                           # criando botão para download .csv
-                        downloadButton( outputId = "downloadDataDeaths",
-                                        label = "Download .csv",
-                                        icon = icon("download"),
-                                        style = "color: black; margin-left: 15px; margin-bottom: 5px;"),
-                      
-                        # criando referência bibliográfica  
-                          h6('Fonte: COTA, W. Monitoramento contínuo da COVID-19 no Brasil: coleta, análise e modelagem de dados epidêmicos, Banco de Dados, Projeto de Pós-Doutorado, Universidade Federal de Viçosa.
-                             Disponível em:',
-                             style='margin-top:0px;'),
-                          
-                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
                         ),
-                        
                         
                         # painel principal para apresentar outputs
                         mainPanel(dygraphOutput(outputId = 'deaths_plot'))
@@ -354,6 +319,14 @@ ui <- fluidPage(
                           
                           splitLayout(cellWidths = c('50%', '50%'),
                                       # criando filtro de data
+                                      sliderInput(inputId = 'deaths_date2',
+                                                  'Arraste para selecionar a data:',
+                                                  min = as.Date(min(deaths_Brazil$date),'%Y-%m-%d'),
+                                                  max = as.Date(max(deaths_Brazil$date),'%Y-%m-%d'),
+                                                  value=as.Date(max(deaths_Brazil$date)),
+                                                  timeFormat='%d-%m-%Y')),
+                          
+                          splitLayout(cellWidths = c('50%', '50%'),
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'deaths_metric2',
                                                      label = 'Escolha a métrica (por Estado):',
@@ -372,22 +345,6 @@ ui <- fluidPage(
                                                      selectize = FALSE,
                                                      size = 3,
                                                      width = '110%')),
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      # criando filtro de data
-                                      sliderInput(inputId = 'deaths_date2',
-                                                  'Arraste para selecionar a data:',
-                                                  min = as.Date(min(deaths_Brazil$date),'%Y-%m-%d'),
-                                                  max = as.Date(max(deaths_Brazil$date),'%Y-%m-%d'),
-                                                  value=as.Date(max(deaths_Brazil$date)),
-                                                  timeFormat='%d-%m-%Y'),
-                                      
-                                      # criando botão de download da base de dados
-                                      downloadButton(
-                                        outputId = "downloadDataSocioDem2",
-                                        label = "Download .csv",
-                                        icon = icon("download"),
-                                        style = "color: black; margin-left: 15px; margin-bottom: 5px;")),
                           
                           splitLayout(cellWidths = c('50%', '50%'),
                                       plotOutput(outputId = 'deaths_map'),
@@ -449,20 +406,6 @@ ui <- fluidPage(
                                       selected = 'RJ')
                         ),
                         
-                        # criando botão para download .csv
-                        downloadButton( outputId = "downloadDataVaccionation",
-                                        label = "Download .csv",
-                                        icon = icon("download"),
-                                        style = "color: black; margin-left: 15px; margin-bottom: 5px;"),
-                      
-                        # criando referência bibliográfica  
-                          h6('Fonte: COTA, W. Monitoramento contínuo da COVID-19 no Brasil: coleta, análise e modelagem de dados epidêmicos, Banco de Dados, Projeto de Pós-Doutorado, Universidade Federal de Viçosa.
-                             Disponível em:',
-                             style='margin-top:0px;'),
-                          
-                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
-                        ),
-                        
                         # painel principal para apresentar outputs
                         mainPanel(dygraphOutput(outputId = 'vaccination_plot'))
                         
@@ -484,11 +427,20 @@ ui <- fluidPage(
                                 
                                 
                       ),
-                        
+                      
                       mainPanel(
                         fluidRow(
                           useShinyjs(),
                           
+                          
+                          splitLayout(cellWidths = c('50%', '50%'),
+                                      # criando filtro de data
+                                      sliderInput(inputId = 'vaccination_date2',
+                                                  'Arraste para selecionar a data:',
+                                                  min = as.Date(min(vaccination_Brazil$date),'%Y-%m-%d'),
+                                                  max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
+                                                  value=as.Date(max(vaccination_Brazil$date)),
+                                                  timeFormat='%d-%m-%Y')),
                           
                           splitLayout(cellWidths = c('50%', '50%'),
                                       # criando caixa de selecao de variavel plotada
@@ -499,7 +451,6 @@ ui <- fluidPage(
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3),
-                                      
                                       
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'demographic_metric4',
@@ -512,27 +463,11 @@ ui <- fluidPage(
                                                      width = '110%')),
                           
                           splitLayout(cellWidths = c('50%', '50%'),
-                                     # criando filtro de data
-                                      sliderInput(inputId = 'vaccination_date2',
-                                                  'Arraste para selecionar a data:',
-                                                  min = as.Date(min(vaccination_Brazil$date),'%Y-%m-%d'),
-                                                  max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
-                                                  value=as.Date(max(vaccination_Brazil$date)),
-                                                  timeFormat='%d-%m-%Y'),
+                                      plotOutput(outputId = 'vaccination_map'),
                                       
-                          
-                                    # criando botão de download da base de dados
-                                    downloadButton( outputId = "downloadDataSocioDem3",
-                                                    label = "Download .csv",
-                                                    icon = icon("download"),
-                                                    style = "color: black; margin-left: 15px; margin-bottom: 5px;")),
-                         
-                         splitLayout(cellWidths = c('50%', '50%'),
-                                     plotOutput(outputId = 'vaccination_map'),
-                                     
-                                     plotOutput(outputId = 'demographic_map4'))
-                       )
-                    )
+                                      plotOutput(outputId = 'demographic_map4'))
+                        )
+                      )
                       
                       
              )

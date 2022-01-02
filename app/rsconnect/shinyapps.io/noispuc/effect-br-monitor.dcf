@@ -1,0 +1,14 @@
+name: effect-br-monitor
+title: effect-br-monitor
+username:
+account: noispuc
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5387705
+bundleId: 5427660
+url: https://noispuc.shinyapps.io/effect-br-monitor/
+when: 1641165670.3561
+lastSyncTime: 1641165670.3561
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: www/210812_Logo Lockup_IG.jpg
