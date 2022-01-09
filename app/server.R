@@ -61,14 +61,22 @@ server  <- function(input, output, session)({
   
   #botão de download de casos
   
-  output$downloadDataCases <- downloadHandler(
-    filename = function() {
-      paste("dadosCasosCovid-19", Sys.Date(), ".csv", sep = "")
-    },
-    content = function(file) {
-      write_csv(cases_Brazil, file)
-    }
-  )
+  output$table_out_cases  <- DT::renderDataTable(
+    datatable(
+      cases_Brazil,
+      rownames = TRUE, 
+      options = list(
+        fixedColumns = FALSE,
+        autoWidth = FALSE,
+        ordering = FALSE,
+        lengthMenu = list(c(10,50,100, -1), 
+                          c('10', '50', '100','All')),
+        dom = 'Btlfipr',
+        buttons = c('copy', 'csv', 'excel', 'pdf')
+      ),
+      class = "display", 
+      extensions = "Buttons"
+    ))
   
   # mapa de casos
   output$cases_map <- renderPlot({create_covid_map(cases_Brazil, 
@@ -78,16 +86,6 @@ server  <- function(input, output, session)({
   # mapa sociodemográfico
   output$demographic_map1<- renderPlot({create_sociodem_map(input$demographic_metric1)})
   
-   #botão de download de dados sociodemograficos
-  
-  output$downloadDataSocioDem1 <- downloadHandler(
-    filename = function() {
-      paste("dadoSocioDemograficos", Sys.Date(), ".csv", sep = "")
-    },
-    content = function(file) {
-      write_csv(mysociodata_Brazil, file)
-    }
-  )
 
   
   ### Aba Óbitos ####  
@@ -127,14 +125,22 @@ server  <- function(input, output, session)({
   
   #botão de download de óbitos
   
-  output$downloadDataDeaths <- downloadHandler(
-    filename = function() {
-      paste("dadosObitosCovid-19", Sys.Date(), ".csv", sep = "")
-    },
-    content = function(file) {
-      write_csv(deaths_Brazil, file)
-    }
-  )
+  output$table_out_deaths  <- DT::renderDataTable(
+    datatable(
+      deaths_Brazil,
+      rownames = TRUE, 
+      options = list(
+        fixedColumns = FALSE,
+        autoWidth = FALSE,
+        ordering = FALSE,
+        lengthMenu = list(c(10,50,100, -1), 
+                          c('10', '50', '100','All')),
+        dom = 'Btlfipr',
+        buttons = c('copy', 'csv', 'excel', 'pdf')
+      ),
+      class = "display", 
+      extensions = "Buttons"
+    ))
   
   # mapa de óbitos
   output$deaths_map <- renderPlot({create_covid_map(deaths_Brazil, 
@@ -143,17 +149,6 @@ server  <- function(input, output, session)({
   
   # mapa sociodemográfico
   output$demographic_map2<- renderPlot({create_sociodem_map(input$demographic_metric2)})
-  
-  #botão de download de dados sociodemograficos
-  
-  output$downloadDataSocioDem2 <- downloadHandler(
-    filename = function() {
-      paste("dadoSocioDemograficos", Sys.Date(), ".csv", sep = "")
-    },
-    content = function(file) {
-      write_csv(mysociodata_Brazil, file)
-    }
-  )
 
   
   ### Aba Vacinação ####  
@@ -182,14 +177,24 @@ server  <- function(input, output, session)({
   
   #botão de download de vacinação
   
-  output$downloadDataVaccionation <- downloadHandler(
-    filename = function() {
-      paste("dadosVacinacaoCovid-19", Sys.Date(), ".csv", sep = "")
-    },
-    content = function(file) {
-      write_csv(vaccination_Brazil, file)
-    }
-  )
+  output$table_out_vaccination  <- DT::renderDataTable(
+    datatable(
+      vaccination_Brazil,
+      rownames = FALSE,
+      options = list(
+        fixedColumns = FALSE,
+        order = list(1, 'desc'),
+        autoWidth = TRUE,
+        ordering = FALSE,
+        scrollX = TRUE,
+        lengthMenu = list(c(10,50,100, -1), 
+                          c('10', '50', '100','All')),
+        dom = 'Btlfipr',
+        buttons = c('copy', 'csv', 'excel', 'pdf')
+      ),
+      class = "display", 
+      extensions = "Buttons"
+    ))
   
   # mapa de vacinação
   output$vaccination_map <- renderPlot({create_covid_map(vaccination_Brazil, 
@@ -199,16 +204,6 @@ server  <- function(input, output, session)({
   # mapa sociodemográfico
   output$demographic_map4 <- renderPlot({create_sociodem_map(input$demographic_metric4)})
   
-  #botão de download de dados sociodemograficos
-  
-  output$downloadDataSocioDem3 <- downloadHandler(
-    filename = function() {
-      paste("dadoSocioDemograficos", Sys.Date(), ".csv", sep = "")
-    },
-    content = function(file) {
-      write_csv(mysociodata_Brazil, file)
-    }
-  )
   
 })
   
