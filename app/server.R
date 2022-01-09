@@ -3,25 +3,25 @@ server  <- function(input, output, session)({
   observeEvent(input$switch_tab_cases, {
     updateTabsetPanel(session, 
                       inputId = 'app',
-                      selected = 'Casos')
+                      selected = 'Cases')
   })
   # leva para a aba de Óbitos
   observeEvent(input$switch_tab_deaths, {
     updateTabsetPanel(session, 
                       inputId = 'app',
-                      selected = 'Óbitos')
+                      selected = 'Deaths')
   })
   # leva para a aba de Hospitalizações
   observeEvent(input$switch_tab_hospitalization, {
     updateTabsetPanel(session, 
                       inputId = 'app',
-                      selected = 'Hospitalizações')
+                      selected = 'Hospitalizations')
   })
   # leva para a aba de Vacinação
   observeEvent(input$switch_tab_vaccination, {
     updateTabsetPanel(session, 
                       inputId = 'app',
-                      selected = 'Vacinação')
+                      selected = 'Vaccinations')
   })
   
   
