@@ -160,6 +160,12 @@ ui <- fluidPage(
                                              min = 1,
                                              max = 14,
                                              value = 7)),
+                          
+                          # criando a referência aos dados
+                          h6('Source: W. Cota, “Monitoring the number of COVID-19 cases and deaths in brazil at municipal and federative units level”, SciELOPreprints:362 (2020), 10.1590/scielopreprints.362',
+                             style='margin-top:0px;'),
+                          
+                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
                         ),
                         
                         
@@ -293,6 +299,12 @@ ui <- fluidPage(
                                              min = 1,
                                              max = 14,
                                              value = 7)),
+                          
+                          # criando a referência aos dados
+                          h6('Source: W. Cota, “Monitoring the number of COVID-19 cases and deaths in brazil at municipal and federative units level”, SciELOPreprints:362 (2020), 10.1590/scielopreprints.362',
+                             style='margin-top:0px;'),
+                          
+                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
                         ),
                         
                         # painel principal para apresentar outputs
@@ -405,7 +417,14 @@ ui <- fluidPage(
                           selectInput(inputId = 'vaccination_state',
                                       label = 'State:',
                                       choices = estados_vacinacao, # precisa ser um vetor com valores unicos
-                                      selected = 'RJ')
+                                      selected = 'RJ'),
+                          
+                          # criando a referência aos dados
+                          h6('Source: W. Cota, “Monitoring the number of COVID-19 cases and deaths in brazil at municipal and federative units level”, SciELOPreprints:362 (2020), 10.1590/scielopreprints.362',
+                             style='margin-top:0px;'),
+                          
+                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
+                          
                         ),
                         
                         # painel principal para apresentar outputs
