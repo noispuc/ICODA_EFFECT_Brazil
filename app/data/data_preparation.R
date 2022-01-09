@@ -5,18 +5,18 @@ Dados_sociodemograficos <- read_excel('Dados_sociodemograficos_2.xlsx')
 cases_Brazil = select(mydata_Brazil,
                       c('date','state','newCases','totalCases','totalCases_per_100k_inhabitants'))
 
-colnames(cases_Brazil) = c('date','state','Novos casos','Total de casos','Total de casos/100k hab.')
+colnames(cases_Brazil) = c('date','state','New cases','Total cases','Total cases per 100k inhabitants')
 
 casos_colunas = select(cases_Brazil, 
-                       c('Novos casos','Total de casos','Total de casos/100k hab.'))
+                       c('New cases','Total cases','Total cases per 100k inhabitants'))
 
 deaths_Brazil = select(mydata_Brazil,
                        c('date','state','newDeaths','deaths','deaths_per_100k_inhabitants','deaths_by_totalCases'))
 
-colnames(deaths_Brazil) = c('date','state','Novos registros de mortes','Registros totais de mortes','Total de mortes/100k hab.','Total de mortes/Total de casos')
+colnames(deaths_Brazil) = c('date','state','Recent deaths registered','Number of deaths registered','Number of deaths registered per 100k inhabitants','Case fatality rate')
 
 obitos_colunas = select(deaths_Brazil,
-                        c('Novos registros de mortes','Registros totais de mortes','Total de mortes/100k hab.','Total de mortes/Total de casos'))
+                        c('Recent deaths registered','Number of deaths registered','Number of deaths registered per 100k inhabitants','Case fatality rate'))
 
 estados_casos_obitos = unique(mydata_Brazil$state)
 
@@ -41,37 +41,37 @@ gb_vaccination_Brazil = vaccination_Brazil %>%
 
 vaccination_Brazil = ungroup(gb_vaccination_Brazil)
 
-colnames(vaccination_Brazil) = c('date','state','Vacinados com 1a dose','Vacinados com 1a dose/100k hab.',
-                                 'Vacinados com dose unica','Vacinados com dose unica/100k hab.',
-                                 'Vacinados com 2a dose','Vacinados com 2a dose/100k hab.',
-                                 'Vacinados com 3a dose','Vacinados com 3a dose/100k hab.',
-                                 'Totalmente vacinados', 'Novos totalmente vacinados',
-                                 'Novos vacinados com 1a dose','Novos vacinados com dose unica',
-                                 'Novos vacinados com 2a dose', 'Novos vacinados com 3a dose')
+colnames(vaccination_Brazil) = c('date','state','1st dose vaccinations (except Johnson & Johnson/Janssen)','1st dose vaccinations (except Johnson & Johnson/Janssen) per 100k inhabitants',
+                                 'One dose of the Johnson & Johnson/Janssen vaccinations','One dose of the Johnson & Johnson/Janssen vaccinations per 100k inhabitants',
+                                 '2nd dose vaccinations','2nd dose vaccinations per 100k inhabitants',
+                                 '3rd dose vaccinations','3rd dose vaccinations per 100k inhabitants',
+                                 'People fully vaccinated', 'Recent people fully vaccinated',
+                                 'Recent 1st dose vaccinations (except Johnson & Johnson/Janssen)','Recent one dose of the Johnson & Johnson/Janssen vaccinations',
+                                 'Recent 2nd dose vaccinations', 'Recent 3rd dose vaccinations')
 
 vacinacao_colunas = select(vaccination_Brazil, 
-                           c('Vacinados com 1a dose','Vacinados com 1a dose/100k hab.',
-                             'Vacinados com dose unica','Vacinados com dose unica/100k hab.',
-                             'Vacinados com 2a dose','Vacinados com 2a dose/100k hab.',
-                             'Vacinados com 3a dose','Vacinados com 3a dose/100k hab.',
-                             'Totalmente vacinados', 'Novos totalmente vacinados',
-                             'Novos vacinados com 1a dose','Novos vacinados com dose unica',
-                             'Novos vacinados com 2a dose', 'Novos vacinados com 3a dose'))
+                           c('1st dose vaccinations (except Johnson & Johnson/Janssen)','1st dose vaccinations (except Johnson & Johnson/Janssen) per 100k inhabitants',
+                             'One dose of the Johnson & Johnson/Janssen vaccinations','One dose of the Johnson & Johnson/Janssen vaccinations per 100k inhabitants',
+                             '2nd dose vaccinations','2nd dose vaccinations per 100k inhabitants',
+                             '3rd dose vaccinations','3rd dose vaccinations per 100k inhabitants',
+                             'People fully vaccinated', 'Recent people fully vaccinated',
+                             'Recent 1st dose vaccinations (except Johnson & Johnson/Janssen)','Recent one dose of the Johnson & Johnson/Janssen vaccinations',
+                             'Recent 2nd dose vaccinations', 'Recent 3rd dose vaccinations'))
 
 mysociodata_Brazil = select(Dados_sociodemograficos,
                             c('COD7','NOME','UF','PIB_P_CAP','GINI','DENS_DEM','PERC60MAIS',
                               'MEDICOS_100MIL','LEITOS_100MIL','PERC_POP_EDUC_SUP'))
 
-colnames(mysociodata_Brazil) = c('codigo','municipio','state','PIB per capita','Índice de Gini da renda domiciliar per capita dos municípios',
-                                 'Densidade demográfica','Percentual da população com 60 anos ou mais',
-                                 'Quantidade de Médicos/100k hab.','Quantidade de Leitos/100k hab.', 
-                                 'Percentual da população com escolaridade de nível superior concluído')
+colnames(mysociodata_Brazil) = c('codigo','municipio','state','Per capita GDP','Gini index of per capita household income',
+                                 'Population density','Population ages 60 and above (% of total population)',
+                                 'Medical doctors per 100K inhabitants','Hospital beds per 100K inhabitants', 
+                                 'Percentage of population with completed tertiary education (college or another higher education)')
 
 sociodem_colunas = select(mysociodata_Brazil,
-                          c('PIB per capita','Índice de Gini da renda domiciliar per capita dos municípios',
-                            'Densidade demográfica','Percentual da população com 60 anos ou mais',
-                            'Quantidade de Médicos/100k hab.','Quantidade de Leitos/100k hab.', 
-                            'Percentual da população com escolaridade de nível superior concluído'))
+                          c('Per capita GDP','Gini index of per capita household income',
+                            'Population density','Population ages 60 and above (% of total population)',
+                             'Medical doctors per 100K inhabitants','Hospital beds per 100K inhabitants', 
+                             'Percentage of population with completed tertiary education (college or another higher education)'))
 
 estados_sociodem = unique(mysociodata_Brazil$state)
 
