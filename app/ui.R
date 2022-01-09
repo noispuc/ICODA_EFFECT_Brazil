@@ -11,9 +11,11 @@ ui <- fluidPage(
                                 style='margin-left:4%; margin-right:4%',
                                 introBox(  
                                   fluidRow(column(7,
-                                                  h3('Bem vindo ao EFFECT-Brazil!', 
+                                                  h3('Welcome to EFFECT-Brazil app!', 
                                                      style='margin-top:0px;'),
-                                                  h4('[Breve descrição do app]', 
+                                                  h4('COVID-19 tracker and data explorer in Brazil - 
+                                                      Explore state-level data on a variety of COVID-19 metrics according confirmed COVID-19 data in Brazil by: 
+                                                      number of cases and case trends over time including deaths, hospitalizations and vaccines.', 
                                                      style='margin-top:0px;'))
                                   )
                                 )
@@ -22,40 +24,40 @@ ui <- fluidPage(
                       br(),
                       
                       fluidRow(
-                        box(title = 'Casos', 
+                        box(title = 'Cases', 
                             width = 3, 
                             background = 'blue',
-                            'Explore dados sobre os casos confirmados de COVID-19',
+                            'Explore the data on confirmed COVID-19 cases for Brazil',
                             br(),
                             actionBttn(inputId = 'switch_tab_cases',
                                        label = 'Acessar página',
                                        style = 'minimal',
                                        size = 'sm')),
                         
-                        box(title = 'Óbitos', 
+                        box(title = 'Deaths', 
                             width = 3, 
                             background = 'yellow',
-                            'Explore dados sobre os óbitos confirmados de COVID-19',
+                            'Explore the data on confirmed COVID-19 deaths for Brazil',
                             br(),
                             actionBttn(inputId = 'switch_tab_deaths',
                                        label = 'Acessar página',
                                        style = 'minimal',
                                        size = 'sm')),
                         
-                        box(title = 'Hospitalizações', 
+                        box(title = 'Hospitalizations', 
                             width = 3, 
                             background = 'red',
-                            'Explore dados sobre as hospitalizações de COVID-19',
+                            'Explore the data on confirmed COVID-19 hospitalizations for Brazil',
                             br(),
                             actionBttn(inputId = 'switch_tab_hospitalization',
                                        label = 'Acessar página',
                                        style = 'minimal',
                                        size = 'sm')),
                         
-                        box(title = 'Vacinação', 
+                        box(title = 'Vaccinations', 
                             width = 3, 
                             background = 'navy',
-                            'Explore dados sobre a vacinação contra a COVID-19',
+                            'Explore data on COVID-19 vaccine uptake and immunization coverage over time in Brazil',
                             br(),
                             actionBttn(inputId = 'switch_tab_vaccination',
                                        label = 'Acessar página',
@@ -93,12 +95,12 @@ ui <- fluidPage(
              ),
              
              
-             tabPanel('Casos',
+             tabPanel('Cases',
                       mainPanel(width = 11, 
                                 style='margin-left:4%; margin-right:4%',
                                 introBox(  
                                   fluidRow(column(12,
-                                                  h3('Explore dados sobre os casos confirmados de COVID-19', 
+                                                  h3('Explore the data on confirmed COVID-19 cases for Brazil', 
                                                      style='margin-top:0px;')))
                                 ),
                                 
@@ -113,48 +115,48 @@ ui <- fluidPage(
                           
                           # criando caixa de selecao de variavel plotada
                           varSelectInput(inputId = 'cases_metric',
-                                         label = 'Escolha a métrica:',
+                                         label = 'Metric:',
                                          data = casos_colunas, 
-                                         selected = 'Novos casos',
+                                         selected = 'New cases',
                                          multiple = TRUE),
                           
                           # criando caixa de intervalo temporal
                           dateRangeInput(inputId = 'cases_date',
-                                         label = 'Intervalo de data:',
+                                         label = 'Tracking date:',
                                          start = max(cases_Brazil$date) - months(6),
                                          end = max(cases_Brazil$date),
                                          format = 'dd/mm/yy'),
                           
                           # criando botão de escolha de agrupamento
                           # radioGroupButtons(inputId = 'cases_groupby',
-                          #                   label = 'Agrupar por:', 
+                          #                   label = 'Group by:', 
                           #                   choices = list('Estado' = 'state',
                           #                                  'Cidade' = 'city'),
                           #                   status = 'primary'),
                           
                           # criando caixa de selecao de estados
                           selectInput(inputId = 'cases_state',
-                                      label = 'Escolha o estado:',
+                                      label = 'State:',
                                       choices = estados_casos_obitos, # precisa ser um vetor com valores unicos
                                       selected = 'RJ'),
                           
                           # criando caixa de selecao de cidades
                           # selectInput(inputId = 'cases_city',
-                          #             label = 'Escolha a cidade:',
+                          #             label = 'City:',
                           #             choices = NULL),
                           
                           # criando caixa para cálculo com ou sem média móvel
                           selectInput(inputId = 'cases_mean',
-                                      label = 'Plotar média móvel?',
-                                      choices = list('Não' = 'withoutmean',
-                                                     'Sim, apenas a média móvel' = 'withmean',
-                                                     'Sim, média móvel + variável original' = 'both'),
+                                      label = 'Plot the Moving Average',
+                                      choices = list('No' = 'withoutmean',
+                                                     'Yes (display the Moving Average only)' = 'withmean',
+                                                     'Yes (display both)' = 'both'),
                                       selected = 'withoutmean'),
                           
                           # criando caixa de selecao de periodos de media movel
                           # a caixa começa escondida quando o app é iniciado
                           hidden(sliderInput(inputId = 'cases_MA_size',
-                                             label = 'Períodos de média móvel:',
+                                             label = 'Period:',
                                              min = 1,
                                              max = 14,
                                              value = 7)),
@@ -175,7 +177,7 @@ ui <- fluidPage(
                                 
                                 introBox(  
                                   fluidRow(column(12,
-                                                  h3('Visualização geográfica dos dados por estado/município sobre os casos confirmados de COVID-19', 
+                                                  h3('Geographical visualization of data by state/city on sociodemographic aspects and on confirmed cases of COVID-19 in Brazil', 
                                                      style='margin-top:0px;')))
                                 ),
                                 
@@ -190,7 +192,7 @@ ui <- fluidPage(
                           splitLayout(cellWidths = c('50%', '50%'),
                                       # criando filtro de data
                                       sliderInput(inputId = 'cases_date2',
-                                                  'Arraste para selecionar a data:',
+                                                  'Date:',
                                                   min = as.Date(min(cases_Brazil$date),'%Y-%m-%d'),
                                                   max = as.Date(max(cases_Brazil$date),'%Y-%m-%d'),
                                                   value=as.Date(max(cases_Brazil$date)),
@@ -199,18 +201,18 @@ ui <- fluidPage(
                           splitLayout(cellWidths = c('50%', '50%'),
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'cases_metric2',
-                                                     label = 'Escolha a métrica (por Estado):',
+                                                     label = 'Metric (state-level):',
                                                      data = casos_colunas, 
-                                                     selected = 'Novos casos',
+                                                     selected = 'New cases',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3),
                                       
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'demographic_metric1',
-                                                     label = 'Escolha a métrica (por Município):',
+                                                     label = 'Metric (city-level):',
                                                      data = sociodem_colunas, 
-                                                     selected = 'PIB per capita',
+                                                     selected = 'Per capita GDP',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3,
@@ -226,12 +228,12 @@ ui <- fluidPage(
              ),
              
              
-             tabPanel('Óbitos',
+             tabPanel('Deaths',
                       mainPanel(width = 11, 
                                 style='margin-left:4%; margin-right:4%',
                                 introBox(  
                                   fluidRow(column(12,
-                                                  h3('Explore dados sobre os óbitos confirmados de COVID-19', 
+                                                  h3('Explore the data on confirmed COVID-19 deaths for Brazil', 
                                                      style='margin-top:0px;')))
                                 ),
                                 
@@ -246,48 +248,48 @@ ui <- fluidPage(
                           
                           # criando caixa de selecao de variavel plotada
                           varSelectInput(inputId = 'deaths_metric',
-                                         label = 'Escolha a métrica:',
+                                         label = 'Metric:',
                                          data = obitos_colunas, 
-                                         selected = 'Novos registros de mortes',
+                                         selected = 'Recent deaths registered',
                                          multiple = TRUE),
                           
                           # criando caixa de intervalo temporal
                           dateRangeInput(inputId = 'deaths_date',
-                                         label = 'Intervalo de data:',
+                                         label = 'Tracking date:',
                                          start = max(deaths_Brazil$date)- months(6),
                                          end = max(deaths_Brazil$date),
                                          format = 'dd/mm/yy'),
                           
                           # criando botão de escolha de agrupamento
                           # radioGroupButtons(inputId = 'deaths_groupby',
-                          #                   label = 'Agrupar por:', 
+                          #                   label = 'Group by:', 
                           #                   choices = list('Estado' = 'state',
                           #                                  'Cidade' = 'city'),
                           #                   status = 'primary'),
                           
                           # criando caixa de selecao de estados
                           selectInput(inputId = 'deaths_state',
-                                      label = 'Escolha o estado:',
+                                      label = 'State:',
                                       choices = estados_casos_obitos, # precisa ser um vetor com valores unicos
                                       selected = 'RJ'),
                           
                           # criando caixa de selecao de cidades
                           # selectInput(inputId = 'deaths_city',
-                          #             label = 'Escolha a cidade:',
+                          #             label = 'City:',
                           #             choices = NULL),
                           
                           # criando caixa para cálculo com ou sem média móvel
                           selectInput(inputId = 'deaths_mean',
-                                      label = 'Plotar média móvel?',
-                                      choices = list('Não' = 'withoutmean',
-                                                     'Sim, apenas a média móvel' = 'withmean',
-                                                     'Sim, média móvel + variável original' = 'both'),
+                                      label = 'Plot the Moving Average',
+                                      choices = list('No' = 'withoutmean',
+                                                     'Yes (display the Moving Average only)' = 'withmean',
+                                                     'Yes (display both)' = 'both'),
                                       selected = 'withoutmean'),
                           
                           # criando caixa de selecao de periodos de media movel
                           # a caixa começa escondida quando o app é iniciado
                           hidden(sliderInput(inputId = 'deaths_MA_size',
-                                             label = 'Períodos de média móvel:',
+                                             label = 'Period:',
                                              min = 1,
                                              max = 14,
                                              value = 7)),
@@ -304,7 +306,7 @@ ui <- fluidPage(
                                 
                                 introBox(  
                                   fluidRow(column(12,
-                                                  h3('Visualização geográfica dos dados por estado/município sobre os óbitos confirmados de COVID-19', 
+                                                  h3('Geographical visualization of data by state/city on sociodemographic aspects and on confirmed deaths of COVID-19 in Brazil', 
                                                      style='margin-top:0px;')))
                                 ),
                                 
@@ -329,18 +331,18 @@ ui <- fluidPage(
                           splitLayout(cellWidths = c('50%', '50%'),
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'deaths_metric2',
-                                                     label = 'Escolha a métrica (por Estado):',
+                                                     label = 'Metric (state-level):',
                                                      data = obitos_colunas, 
-                                                     selected = 'Novos registros de mortes',
+                                                     selected = 'Recent deaths registered',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3),
                                       
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'demographic_metric2',
-                                                     label = 'Escolha a métrica (por Município):',
+                                                     label = 'Metric (city-level):',
                                                      data = sociodem_colunas, 
-                                                     selected = 'PIB per capita',
+                                                     selected = 'Per capita GDP',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3,
@@ -355,7 +357,7 @@ ui <- fluidPage(
                       
              ),
              
-             tabPanel('Hospitalizações',
+             tabPanel('Hospitalizations',
                       menuItem('Source code', icon = icon('file-code-o'), 
                                href = 'https://github.com/lslbastos/Bastos_Ranzani_etal_COVID19_ChangeWaves'),
                       fluidRow(
@@ -367,12 +369,12 @@ ui <- fluidPage(
                       
              ),
              
-             tabPanel('Vacinação',
+             tabPanel('Vaccinations',
                       mainPanel(width = 11, 
                                 style='margin-left:4%; margin-right:4%',
                                 introBox(  
                                   fluidRow(column(12,
-                                                  h3('Explore dados sobre a vacinação contra a COVID-19', 
+                                                  h3('Explore data on COVID-19 vaccine uptake and immunization coverage over time in Brazil', 
                                                      style='margin-top:0px;')))
                                 ),
                                 
@@ -387,21 +389,21 @@ ui <- fluidPage(
                           
                           # criando caixa de selecao de variavel plotada
                           varSelectInput(inputId = 'vaccination_metric',
-                                         label = 'Escolha a métrica:',
+                                         label = 'Metric:',
                                          data = vacinacao_colunas, 
-                                         selected = 'Vacinados com 1a dose',
+                                         selected = '1st dose vaccinations (except Johnson & Johnson/Janssen)',
                                          multiple = TRUE),
                           
                           # criando caixa de intervalo temporal
                           dateRangeInput(inputId = 'vaccination_date',
-                                         label = 'Intervalo de data:',
+                                         label = 'Tracking date (dd/mm/yy):',
                                          start = max(vaccination_Brazil$date) - months(6),
                                          end = max(vaccination_Brazil$date),
                                          format = 'dd/mm/yy'),
                           
                           # criando caixa de selecao de estados
                           selectInput(inputId = 'vaccination_state',
-                                      label = 'Escolha o estado:',
+                                      label = 'State:',
                                       choices = estados_vacinacao, # precisa ser um vetor com valores unicos
                                       selected = 'RJ')
                         ),
@@ -418,7 +420,7 @@ ui <- fluidPage(
                                 
                                 introBox(  
                                   fluidRow(column(12,
-                                                  h3('Visualização geográfica dos dados por estado/município sobre vacinação contra COVID-19', 
+                                                  h3('Geographical visualization of data by state/city on sociodemographic aspects and on vaccine uptake and immunization coverage of COVID-19 in Brazil', 
                                                      style='margin-top:0px;')))
                                 ),
                                 
@@ -436,7 +438,7 @@ ui <- fluidPage(
                           splitLayout(cellWidths = c('50%', '50%'),
                                       # criando filtro de data
                                       sliderInput(inputId = 'vaccination_date2',
-                                                  'Arraste para selecionar a data:',
+                                                  'Date:',
                                                   min = as.Date(min(vaccination_Brazil$date),'%Y-%m-%d'),
                                                   max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
                                                   value=as.Date(max(vaccination_Brazil$date)),
@@ -445,18 +447,18 @@ ui <- fluidPage(
                           splitLayout(cellWidths = c('50%', '50%'),
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'vaccination_metric2',
-                                                     label = 'Escolha a métrica (por Estado):',
+                                                     label = 'Metric (state-level):',
                                                      data = vacinacao_colunas, 
-                                                     selected = 'Vacinados com 1a dose',
+                                                     selected = '1st dose vaccinations (except Johnson & Johnson/Janssen)',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3),
                                       
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'demographic_metric4',
-                                                     label = 'Escolha a métrica (por Município):',
+                                                     label = 'Metric (city-level):',
                                                      data = sociodem_colunas, 
-                                                     selected = 'PIB per capita',
+                                                     selected = 'Per capita GDP',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3,
