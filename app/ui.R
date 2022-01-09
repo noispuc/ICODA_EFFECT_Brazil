@@ -122,7 +122,7 @@ ui <- fluidPage(
                           
                           # criando caixa de intervalo temporal
                           dateRangeInput(inputId = 'cases_date',
-                                         label = 'Tracking date:',
+                                         label = 'Tracking date (dd/mm/yy):',
                                          start = max(cases_Brazil$date) - months(6),
                                          end = max(cases_Brazil$date),
                                          format = 'dd/mm/yy'),
@@ -130,8 +130,8 @@ ui <- fluidPage(
                           # criando botão de escolha de agrupamento
                           # radioGroupButtons(inputId = 'cases_groupby',
                           #                   label = 'Group by:', 
-                          #                   choices = list('Estado' = 'state',
-                          #                                  'Cidade' = 'city'),
+                          #                   choices = list('State' = 'state',
+                          #                                  'City' = 'city'),
                           #                   status = 'primary'),
                           
                           # criando caixa de selecao de estados
@@ -255,7 +255,7 @@ ui <- fluidPage(
                           
                           # criando caixa de intervalo temporal
                           dateRangeInput(inputId = 'deaths_date',
-                                         label = 'Tracking date:',
+                                         label = 'Tracking date (dd/mm/yy)',
                                          start = max(deaths_Brazil$date)- months(6),
                                          end = max(deaths_Brazil$date),
                                          format = 'dd/mm/yy'),
@@ -263,8 +263,8 @@ ui <- fluidPage(
                           # criando botão de escolha de agrupamento
                           # radioGroupButtons(inputId = 'deaths_groupby',
                           #                   label = 'Group by:', 
-                          #                   choices = list('Estado' = 'state',
-                          #                                  'Cidade' = 'city'),
+                          #                   choices = list('State' = 'state',
+                          #                                  'City' = 'city'),
                           #                   status = 'primary'),
                           
                           # criando caixa de selecao de estados
