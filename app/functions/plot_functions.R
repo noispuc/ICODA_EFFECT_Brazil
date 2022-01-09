@@ -34,7 +34,7 @@ create_covid_map <- function(df, input_date, input_metric) {
             color = NA) +
     labs(title = titulo_map, 
          size = 15,
-         caption = "Fonte: Dados de https://github.com/wcota/covid19br") +
+         caption = "Source: https://github.com/wcota/covid19br") +
     scale_fill_distiller(palette = 'BuPu',
                          direction = 1) +
     theme_minimal() +
@@ -63,7 +63,7 @@ create_sociodem_map <- function(metric){
             color = NA) +
     labs(title = titulo_map, 
          size = 15,
-         caption = "Fonte: Dados do IBGE e DataSUS") +
+         caption = "Source:IBGE and DataSUS' open data") +
     scale_fill_distiller(palette = 'YlOrBr',
                          direction = 1) +
     theme_minimal() +
