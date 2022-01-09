@@ -170,7 +170,11 @@ ui <- fluidPage(
                         
                         
                         # painel principal para apresentar outputs
-                        mainPanel(dygraphOutput(outputId = 'cases_plot'))
+                        mainPanel(dygraphOutput(outputId = 'cases_plot'),
+                                  
+                        br(),
+                        
+                        DT::dataTableOutput("table_out_cases"))
                         
                       ),
                       
@@ -308,7 +312,11 @@ ui <- fluidPage(
                         ),
                         
                         # painel principal para apresentar outputs
-                        mainPanel(dygraphOutput(outputId = 'deaths_plot'))
+                        mainPanel(dygraphOutput(outputId = 'deaths_plot'),
+                                  
+                                  br(),
+                                  
+                                  DT::dataTableOutput("table_out_deaths"))
                         
                       ),
                       
@@ -428,7 +436,11 @@ ui <- fluidPage(
                         ),
                         
                         # painel principal para apresentar outputs
-                        mainPanel(dygraphOutput(outputId = 'vaccination_plot'))
+                        mainPanel(dygraphOutput(outputId = 'vaccination_plot'),
+                                  
+                                  br(),
+                                  
+                                  DT::dataTableOutput("table_out_vaccination"))
                         
                       ),
                       
