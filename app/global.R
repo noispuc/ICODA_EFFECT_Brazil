@@ -15,6 +15,7 @@
 # install.packages('geobr')
 # install.packages('sf')
 # install.packages('data.table')
+# install.packages('DT')
 # install.packages('scales')
 
 library(tidyverse)
@@ -42,6 +43,7 @@ library(sf)
 library(data.table)
 library(scales)
 library(lubridate)
+library(DT)
 
 
 # importando funções criadas
