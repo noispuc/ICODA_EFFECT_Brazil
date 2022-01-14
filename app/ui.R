@@ -11,11 +11,7 @@ ui <- fluidPage(
                                 style='margin-left:4%; margin-right:4%',
                                 introBox(  
                                   fluidRow(column(7,
-                                                  h3('Welcome to EFFECT-Brazil app!', 
-                                                     style='margin-top:0px;'),
-                                                  h4('COVID-19 tracker and data explorer in Brazil - 
-                                                      Explore state-level data on a variety of COVID-19 metrics according confirmed COVID-19 data in Brazil by: 
-                                                      number of cases and case trends over time including deaths, hospitalizations and vaccines.', 
+                                                  h3('Welcome to EFFECT-Brazil Monitor app!', 
                                                      style='margin-top:0px;'))
                                   )
                                 )
@@ -123,7 +119,7 @@ ui <- fluidPage(
                           # criando caixa de intervalo temporal
                           dateRangeInput(inputId = 'cases_date',
                                          label = 'Tracking date (dd/mm/yy):',
-                                         start = max(cases_Brazil$date) - months(6),
+                                         start = max(cases_Brazil$date) - months(1),
                                          end = max(cases_Brazil$date),
                                          format = 'dd/mm/yy'),
                           
@@ -266,7 +262,7 @@ ui <- fluidPage(
                           # criando caixa de intervalo temporal
                           dateRangeInput(inputId = 'deaths_date',
                                          label = 'Tracking date (dd/mm/yy)',
-                                         start = max(deaths_Brazil$date)- months(6),
+                                         start = max(deaths_Brazil$date)- months(1),
                                          end = max(deaths_Brazil$date),
                                          format = 'dd/mm/yy'),
                           
@@ -417,7 +413,7 @@ ui <- fluidPage(
                           # criando caixa de intervalo temporal
                           dateRangeInput(inputId = 'vaccination_date',
                                          label = 'Tracking date (dd/mm/yy):',
-                                         start = max(vaccination_Brazil$date) - months(6),
+                                         start = max(vaccination_Brazil$date) - months(1),
                                          end = max(vaccination_Brazil$date),
                                          format = 'dd/mm/yy'),
                           
@@ -502,6 +498,42 @@ ui <- fluidPage(
                         )
                       )
                       
+                      
+             ),
+             
+             tabPanel('About us',
+                      h1('About us'),
+                      h3('EFFECT-Brazil Monitor'),
+                      p('This app is a COVID-19 tracker and data explorer in Brazil.'),
+                      p('You can explore state-level data on a variety of COVID-19 metrics according confirmed COVID-19 data in Brazil by: 
+                         number of cases and case trends over time including deaths, hospitalizations and vaccines.'),
+                      br(),
+                      h3('Web development team'),
+                      br(),
+                      fluidRow(
+                        # JÉSSICA
+                        column(width = 2, align = "center",
+                               img(src = "jessica.png")
+                        ),
+                        column(width = 2,
+                               p('Jéssica Villar'),
+                               p('jessica.c.villar@hotmail.com'),
+                               a('Lattes', href = 'http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K8611793T6&tokenCaptchar=03AGdBq250XljBHqd_AOWghMWr795prPtraUIbFTdN651iErGiRn9Dksnk0E8bSTpCL3AtpLXVvygoiBkpRhHvZ5Ma7cUNs1cnatyiwHXHjo_3OM2orSCsgQ_JdaIEZV7qCZ2HRGTD6dQJiF7ytKlVdsm-1wrKO-u5vUbjK60PZpRRwT58uSOFuFNIToQTYTUVapbCXjOyNBi-BTcXvKUu3mzWtZulaBRS5C_nsNAXyHNKyDmsuCGOULV0lYIUX8I-03rX6XQ0i4IQ0Q0guhjSKyhCbWX8KCGLVgweoEs0B-yNn7_02n_fzZTCDJs09nve6Ab0Ww34WFlFV0nRN-hrnuo7OVxlPJ-g4bJnMXmGiZ66gW2qykWr8LfQDdsAQ932KGM8tQ6PwLQReHMcMvrBLBSnO3xY1CDvWCjbkoY-Fs0PgjILmQPs399l52rbnKVTiofe3Ggp6KLDz-GiU9ETy2nRY7fim3bVWQ'),
+                               br(),
+                               a('Linkedin', href = 'https://www.linkedin.com/in/jessica-villar/')
+                        ),
+                        # THAIS
+                        column(width = 2, align = "center",
+                               img(src = "thais.jpg")
+                        ),
+                        column(width = 2,
+                               p('Thaís Camargo'),
+                               p('thaisdeabreuc@gmail.com'),
+                               a('Lattes', href = 'http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K2870836T1&tokenCaptchar=03AGdBq27mMSzjprRp6swWCWHIK0PwfspLX2ZJWeRATKlcQGjVu_cRK_hm2ltSqXLT4yrZbWnkGAawMollaaabfblqpcC7YeIft7N_XogIsjDlOYk7xQ1ckr1jcKvoeenD0Hk3RmsbD4MwkdkGRvGteyHEQWxiyWP96bRd6Ovz2ptvGgnyOj3IMcoNji_AIjAHcUm5vHN7UOi2J-76M3uWV_Bd3pLQHlQ3wvbDzxdXqPwplg44_6NLUthbaXGySg0PEBsvrrtNCSjSgJaJA7ZoM4dVs6Py5iKt7w1sQv47tFDfKch3mYJM5aO6tunqnSlhBJVzfSlJfbuZ1uqgtjl9oDsGljloYI2TIXFK05JLGds_XfmizMid-t3yK3fsVftgQQou5DRIUfoE3ktu5WM8eSwAd8TXX1wit3JarVCKpVssIZ16XfV9JMTihp1_gyArwklM0ttcHhFRTkwZoVTUQkhni7OXvmoAhg'),
+                               br(),
+                               a('Linkedin', href = 'https://www.linkedin.com/in/tha%C3%ADs-camargo-8172a319a/')
+                        )
+                      )
                       
              )
              
