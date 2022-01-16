@@ -202,6 +202,7 @@ ui <- fluidPage(
                                                   min = as.Date(min(cases_Brazil$date),'%Y-%m-%d'),
                                                   max = as.Date(max(cases_Brazil$date),'%Y-%m-%d'),
                                                   value=as.Date(max(cases_Brazil$date)),
+                                                  animate=animationOptions(interval = 700, loop = FALSE),
                                                   timeFormat='%d-%m-%Y')),
                           
                           splitLayout(cellWidths = c('50%', '50%'),
@@ -342,6 +343,7 @@ ui <- fluidPage(
                                                   min = as.Date(min(deaths_Brazil$date),'%Y-%m-%d'),
                                                   max = as.Date(max(deaths_Brazil$date),'%Y-%m-%d'),
                                                   value=as.Date(max(deaths_Brazil$date)),
+                                                  animate=animationOptions(interval = 700, loop = FALSE),
                                                   timeFormat='%d-%m-%Y')),
                           
                           splitLayout(cellWidths = c('50%', '50%'),
@@ -469,6 +471,7 @@ ui <- fluidPage(
                                                   min = as.Date(min(vaccination_Brazil$date),'%Y-%m-%d'),
                                                   max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
                                                   value=as.Date(max(vaccination_Brazil$date)),
+                                                  animate=animationOptions(interval = 700, loop = FALSE),
                                                   timeFormat='%d-%m-%Y')),
                           
                           splitLayout(cellWidths = c('50%', '50%'),
