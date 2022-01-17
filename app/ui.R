@@ -26,7 +26,7 @@ ui <- fluidPage(
                             'Explore the data on confirmed COVID-19 cases for Brazil',
                             br(),
                             actionBttn(inputId = 'switch_tab_cases',
-                                       label = 'Acessar página',
+                                       label = 'Take me there',
                                        style = 'minimal',
                                        size = 'sm')),
                         
@@ -36,7 +36,7 @@ ui <- fluidPage(
                             'Explore the data on confirmed COVID-19 deaths for Brazil',
                             br(),
                             actionBttn(inputId = 'switch_tab_deaths',
-                                       label = 'Acessar página',
+                                       label = 'Take me there',
                                        style = 'minimal',
                                        size = 'sm')),
                         
@@ -46,7 +46,7 @@ ui <- fluidPage(
                             'Explore the data on confirmed COVID-19 hospitalizations for Brazil',
                             br(),
                             actionBttn(inputId = 'switch_tab_hospitalization',
-                                       label = 'Acessar página',
+                                       label = 'Take me there',
                                        style = 'minimal',
                                        size = 'sm')),
                         
@@ -56,7 +56,7 @@ ui <- fluidPage(
                             'Explore data on COVID-19 vaccine uptake and immunization coverage over time in Brazil',
                             br(),
                             actionBttn(inputId = 'switch_tab_vaccination',
-                                       label = 'Acessar página',
+                                       label = 'Take me there',
                                        style = 'minimal',
                                        size = 'sm')),
                         
