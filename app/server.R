@@ -196,6 +196,30 @@ server  <- function(input, output, session)({
       extensions = "Buttons"
     ))
   
+  # 1º plotly estatísticas de vacinação
+  
+  output$graph <- renderPlotly({vaccination_Brazil %>% 
+      inner_join(Brazil_Populations)%>%
+      filter(date == max(date),
+             state != "TOTAL") %>% 
+      mutate(fully_vaccinated_ratio = `People fully vaccinated`/`Population`) %>%
+      arrange(- fully_vaccinated_ratio) %>%
+      slice_head(n = 10) %>%
+      arrange(fully_vaccinated_ratio) %>%
+      mutate(state.order = reorder(state,fully_vaccinated_ratio )) %>%
+      plot_ly(y = ~ state.order,
+              x = ~ round(100 * fully_vaccinated_ratio, 2),
+              text = ~ paste(round(100 * fully_vaccinated_ratio, 1), "%"),
+              textposition = 'auto',
+              orientation = "h",
+              type = "bar") %>%
+      layout(title = "Percentage of Fully Vaccinated Population - Top 10 Brazilian States",
+             yaxis = list(title = ""),
+             xaxis = list(title = "Source: https://github.com/wcota/covid19br",
+                          ticksuffix = "%",
+                          range = c(0, 100)))
+  })
+  
   # mapa de vacinação
   output$vaccination_map <- renderPlot({create_covid_map(vaccination_Brazil, 
                                                          input$vaccination_date2, 
