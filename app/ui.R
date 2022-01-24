@@ -308,7 +308,7 @@ ui <- fluidPage(
                           tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
                         ),
                         
-                        # painel principal para apresentar outputs
+                        # painel principal para apresentar outputs 
                         mainPanel(dygraphOutput(outputId = 'deaths_plot'),
                                   
                                   br(),
@@ -433,7 +433,7 @@ ui <- fluidPage(
                           
                         ),
                         
-                        # painel principal para apresentar outputs
+                        # painel principal para apresentar outputs gerais
                         mainPanel(dygraphOutput(outputId = 'vaccination_plot'),
                                   
                                   br(),
@@ -441,6 +441,28 @@ ui <- fluidPage(
                                   DT::dataTableOutput("table_out_vaccination"))
                         
                       ),
+                      
+                       mainPanel(width = 11, 
+                                style='margin-left:4%; margin-right:4%',
+                                br(),
+                                br(),
+                                
+                                introBox(  
+                                  fluidRow(column(12,
+                                                  h3('Vaccination Numbers and Statistics', 
+                                                     style='margin-top:0px;')))
+                                ),
+                                
+                                br()
+                                
+                                
+                                
+                      ),
+                      
+                      # painel principal para apresentar outputs de estatísticas de vacinação
+                      mainPanel(
+                        plotlyOutput("graph")),
+                      
                       
                       mainPanel(width = 11, 
                                 style='margin-left:4%; margin-right:4%',
