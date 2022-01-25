@@ -83,7 +83,7 @@ ui <- fluidPage(
                                               style = "background-color:#0e76a8; border-color:#0e76a8",
                                               onclick = sprintf("window.open('%s')", "https://www.linkedin.com/shareArticle?mini=true&url=https://noispuc.shinyapps.io/effect-br-monitor/")),
                                  br(),
-                                 img(src = '210812_Logo Lockup_IG2.jpg')
+                                 img(src = 'logo.png')
                         )
                         
                         
@@ -210,7 +210,7 @@ ui <- fluidPage(
                                       varSelectInput(inputId = 'cases_metric2',
                                                      label = 'Select a metric (state-level):',
                                                      data = casos_colunas, 
-                                                     selected = 'None',
+                                                     selected = 'New cases',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3),
@@ -219,7 +219,7 @@ ui <- fluidPage(
                                       varSelectInput(inputId = 'demographic_metric1',
                                                      label = 'Select a metric (city-level):',
                                                      data = sociodem_colunas, 
-                                                     selected = 'None',
+                                                     selected = 'Per capita GDP',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3,
@@ -351,7 +351,7 @@ ui <- fluidPage(
                                       varSelectInput(inputId = 'deaths_metric2',
                                                      label = 'Select a metric (state-level):',
                                                      data = obitos_colunas, 
-                                                     selected = 'None',
+                                                     selected = 'Recent deaths registered',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3),
@@ -360,7 +360,7 @@ ui <- fluidPage(
                                       varSelectInput(inputId = 'demographic_metric2',
                                                      label = 'Select a metric (city-level):',
                                                      data = sociodem_colunas, 
-                                                     selected = 'None',
+                                                     selected = 'Per capita GDP',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3,
