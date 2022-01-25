@@ -38,7 +38,7 @@ library(rintrojs)
 library(shinyjs)
 library(lubridate)
 library(plotly)
-library(geobr)
+# library(geobr)
 library(sf)
 library(data.table)
 library(scales)
@@ -56,8 +56,10 @@ source('data/data_preparation.R')
 
 
 # configuração padrão para mapas
-all_muni <- read_municipality(year = 2019)
-states <- read_state(year = 2019)
+# all_muni <- read_municipality(year = 2019)
+# states <- read_state(year = 2019)
+all_muni <- read_rds('shape_files/shp_brazil_municipalities.rds')
+states <- read_rds('shape_files/shp_state_brazil_map.rds')
 no_axis <- theme(axis.title = element_blank(),
                  axis.text = element_blank(),
                  axis.ticks = element_blank())

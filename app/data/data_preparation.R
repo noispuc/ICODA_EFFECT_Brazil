@@ -1,7 +1,7 @@
 urlfile <- 'https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-states.csv'
 mydata_Brazil <- read_csv(url(urlfile))
-Dados_sociodemograficos <- read_excel('Dados_sociodemograficos_2.xlsx')
-Brazil_Populations = read_excel('Brazil_Populations.xlsx')
+Dados_sociodemograficos <- read_excel('data/datasets/Dados_sociodemograficos_2.xlsx')
+Brazil_Populations <- read_excel('data/datasets/Brazil_Populations.xlsx')
 
 cases_Brazil = select(mydata_Brazil,
                       c('date','state','newCases','totalCases','totalCases_per_100k_inhabitants'))
