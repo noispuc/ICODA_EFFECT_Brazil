@@ -196,28 +196,48 @@ server  <- function(input, output, session)({
       extensions = "Buttons"
     ))
   
-  # 1º plotly estatísticas de vacinação
+   # 1º plotly estatísticas de vacinação
   
-  output$graph <- renderPlotly({vaccination_Brazil %>% 
+  output$graph_1 <- renderPlotly({vaccination_Brazil %>% 
       inner_join(Brazil_Populations)%>%
-      filter(date == max(date),
+      filter(date == input$vaccination_date_statistics,
              state != "TOTAL") %>% 
-      mutate(fully_vaccinated_ratio = `People fully vaccinated`/`Population`) %>%
-      arrange(- fully_vaccinated_ratio) %>%
-      slice_head(n = 10) %>%
-      arrange(fully_vaccinated_ratio) %>%
+      mutate(fully_vaccinated_ratio = `People fully vaccinated`/`Population`) %>% 
+      subset(state %in% c(input$vaccination_state_statistics))%>%
       mutate(state.order = reorder(state,fully_vaccinated_ratio )) %>%
-      plot_ly(y = ~ state.order,
+      plot_ly(y = ~state.order,
               x = ~ round(100 * fully_vaccinated_ratio, 2),
-              text = ~ paste(round(100 * fully_vaccinated_ratio, 1), "%"),
+              text = ~ paste(round(100 *  fully_vaccinated_ratio, 1), "%"),
               textposition = 'auto',
               orientation = "h",
               type = "bar") %>%
-      layout(title = "Percentage of Fully Vaccinated Population - Top 10 Brazilian States",
+      layout(title = "Percentage of Fully Vaccinated Population - Brazilian States",
              yaxis = list(title = ""),
              xaxis = list(title = "Source: https://github.com/wcota/covid19br",
                           ticksuffix = "%",
                           range = c(0, 100)))
+  })
+  
+  
+  # 2º plotly estatísticas de vacinação
+  
+  output$graph_2 <- renderPlotly({
+    p <- plotly::plot_ly()
+    
+    p <- p %>% plotly::add_lines(data = vaccination_Brazil %>% 
+                                   inner_join(Brazil_Populations)%>%
+                                   filter(state != "TOTAL") %>% 
+                                   mutate(fully_vaccinated_ratio = `People fully vaccinated`*(100000)/`Population`) %>% 
+                                   subset(state %in% c(input$vaccination_state_statistics)), 
+                                 x = ~date, 
+                                 y = ~fully_vaccinated_ratio,
+                                 color = ~ordered(state))
+    
+    p %>% 
+      layout(title = "Vaccinated Population per 100k Inhabitants - Brazilian States",
+             yaxis = list(title = "",
+                          range = c(0, 100000)),
+             xaxis = list(title = "Source: https://github.com/wcota/covid19br"))
   })
   
   # mapa de vacinação
