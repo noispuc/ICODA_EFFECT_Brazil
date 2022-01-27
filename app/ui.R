@@ -387,7 +387,7 @@ ui <- fluidPage(
                       
              ),
              
-             tabPanel('Vaccinations',
+   tabPanel('Vaccinations',
                       mainPanel(width = 11, 
                                 style='margin-left:4%; margin-right:4%',
                                 introBox(  
@@ -432,17 +432,23 @@ ui <- fluidPage(
                           tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
                           
                         ),
+  
                         
-                        # painel principal para apresentar outputs gerais
+                        # painel principal para apresentar outputs
                         mainPanel(dygraphOutput(outputId = 'vaccination_plot'),
                                   
                                   br(),
+                                  br(),
                                   
-                                  DT::dataTableOutput("table_out_vaccination"))
+                                  DT::dataTableOutput("table_out_vaccination")
+                                  
+                        )
+                                  
+                                  
                         
                       ),
                       
-                       mainPanel(width = 11, 
+                      mainPanel(width = 11, 
                                 style='margin-left:4%; margin-right:4%',
                                 br(),
                                 br(),
@@ -459,9 +465,37 @@ ui <- fluidPage(
                                 
                       ),
                       
-                      # painel principal para apresentar outputs de estatísticas de vacinação
+                      sidebarLayout(
+                        # criando barra lateral para inputar dados para o gráfico estatísticas de vacinação
+                        sidebarPanel(
+                          useShinyjs(),
+                          
+                          
+                          # criando caixa de selecao de estados
+                          selectInput(inputId = 'vaccination_state_statistics',
+                                      label = 'States:',
+                                      choices = Brazil_Populations$state, # precisa ser um vetor com valores unicos
+                                      selected = list('SP','PI','MS','MG','CE','RS','ES','PR','RJ'),
+                                      multiple = TRUE),
+                        
+                        # criando filtro de data
+                        sliderInput(inputId = 'vaccination_date_statistics',
+                                    'Tracking Date:',
+                                    min = as.Date("2021-06-30",'%Y-%m-%d'),
+                                    max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
+                                    value=as.Date(max(vaccination_Brazil$date)),
+                                    animate=animationOptions(interval = 400, loop = FALSE),
+                                    timeFormat='%d-%m-%Y')
+                        ),
+                      
+                      
                       mainPanel(
-                        plotlyOutput("graph")),
+                        plotlyOutput("graph_1"),
+                        
+                        br(),
+                        
+                        plotlyOutput("graph_2"))
+                      ),
                       
                       
                       mainPanel(width = 11, 
@@ -481,6 +515,8 @@ ui <- fluidPage(
                                 
                       ),
                       
+                      
+                      
                       mainPanel(
                         fluidRow(
                           useShinyjs(),
@@ -499,19 +535,18 @@ ui <- fluidPage(
                           splitLayout(cellWidths = c('50%', '50%'),
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'vaccination_metric2',
-                                                     label = 'Select a metric (state-level):',
+                                                     label = 'Metric (state-level):',
                                                      data = vacinacao_colunas, 
-                                                     # selected = '1st dose vaccinations (except Johnson & Johnson/Janssen)',
-                                                     selected = 'None',
+                                                     selected = '1st dose vaccinations (except Johnson & Johnson/Janssen)',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3),
                                       
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'demographic_metric4',
-                                                     label = 'Select a metric (city-level):',
+                                                     label = 'Metric (city-level):',
                                                      data = sociodem_colunas, 
-                                                     selected = 'None',
+                                                     selected = 'Per capita GDP',
                                                      multiple = FALSE,
                                                      selectize = FALSE,
                                                      size = 3,
