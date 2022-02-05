@@ -535,7 +535,7 @@ ui <- fluidPage(
                           splitLayout(cellWidths = c('50%', '50%'),
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'vaccination_metric2',
-                                                     label = 'Metric (state-level):',
+                                                     label = 'Select a metric (state-level):',
                                                      data = vacinacao_colunas, 
                                                      selected = '1st dose vaccinations (except Johnson & Johnson/Janssen)',
                                                      multiple = FALSE,
@@ -544,7 +544,7 @@ ui <- fluidPage(
                                       
                                       # criando caixa de selecao de variavel plotada
                                       varSelectInput(inputId = 'demographic_metric4',
-                                                     label = 'Metric (city-level):',
+                                                     label = 'Select a metric (city-level):',
                                                      data = sociodem_colunas, 
                                                      selected = 'Per capita GDP',
                                                      multiple = FALSE,

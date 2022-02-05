@@ -5,9 +5,9 @@ account: noispuc
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5387705
-bundleId: 5507417
+bundleId: 5518078
 url: https://noispuc.shinyapps.io/effect-br-monitor/
-when: 1643138762.5749
-lastSyncTime: 1643138762.5749
+when: 1643372972.69297
+lastSyncTime: 1643372972.69297
 asMultiple: FALSE
 asStatic: FALSE
