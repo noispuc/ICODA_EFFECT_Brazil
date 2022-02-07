@@ -51,13 +51,14 @@ colnames(vaccination_Brazil) = c('date','state','1st dose vaccinations (except J
                                  'Recent 2nd dose vaccinations', 'Recent 3rd dose vaccinations')
 
 vacinacao_colunas = select(vaccination_Brazil, 
-                           c('1st dose vaccinations (except Johnson & Johnson/Janssen)','1st dose vaccinations (except Johnson & Johnson/Janssen) per 100k inhabitants',
-                             'One dose of the Johnson & Johnson/Janssen vaccinations','One dose of the Johnson & Johnson/Janssen vaccinations per 100k inhabitants',
+                           c('People fully vaccinated', 'Recent people fully vaccinated',
+                             '1st dose vaccinations (except Johnson & Johnson/Janssen)',
+                             '1st dose vaccinations (except Johnson & Johnson/Janssen) per 100k inhabitants',
                              '2nd dose vaccinations','2nd dose vaccinations per 100k inhabitants',
                              '3rd dose vaccinations','3rd dose vaccinations per 100k inhabitants',
-                             'People fully vaccinated', 'Recent people fully vaccinated',
-                             'Recent 1st dose vaccinations (except Johnson & Johnson/Janssen)','Recent one dose of the Johnson & Johnson/Janssen vaccinations',
-                             'Recent 2nd dose vaccinations', 'Recent 3rd dose vaccinations'))
+                             'One dose of the Johnson & Johnson/Janssen vaccinations','One dose of the Johnson & Johnson/Janssen vaccinations per 100k inhabitants',
+                             'Recent 1st dose vaccinations (except Johnson & Johnson/Janssen)',
+                             'Recent 2nd dose vaccinations', 'Recent 3rd dose vaccinations','Recent one dose of the Johnson & Johnson/Janssen vaccinations',))
 
 mysociodata_Brazil = select(Dados_sociodemograficos,
                             c('COD7','NOME','UF','PIB_P_CAP','GINI','DENS_DEM','PERC60MAIS',
