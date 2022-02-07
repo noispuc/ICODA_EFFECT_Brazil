@@ -92,288 +92,253 @@ ui <- fluidPage(
              
              
              tabPanel('Cases',
-                      mainPanel(width = 11, 
-                                style='margin-left:4%; margin-right:4%',
-                                introBox(  
-                                  fluidRow(column(12,
-                                                  h3('Explore the data on confirmed COVID-19 cases for Brazil', 
-                                                     style='margin-top:0px;')))
-                                ),
-                                
-                                br()
-                                
-                      ),
-                      
-                      sidebarLayout(
-                        # criando barra lateral para inputar dados
-                        sidebarPanel(
-                          useShinyjs(),
-                          
-                          # criando caixa de selecao de variavel plotada
-                          varSelectInput(inputId = 'cases_metric',
-                                         label = 'Metric:',
-                                         data = casos_colunas, 
-                                         selected = 'New cases',
-                                         multiple = TRUE),
-                          
-                          # criando caixa de intervalo temporal
-                          dateRangeInput(inputId = 'cases_date',
-                                         label = 'Tracking date (dd/mm/yy):',
-                                         start = max(cases_Brazil$date) - months(1),
-                                         end = max(cases_Brazil$date),
-                                         format = 'dd/mm/yy'),
-                          
-                          # criando botão de escolha de agrupamento
-                          # radioGroupButtons(inputId = 'cases_groupby',
-                          #                   label = 'Group by:', 
-                          #                   choices = list('State' = 'state',
-                          #                                  'City' = 'city'),
-                          #                   status = 'primary'),
-                          
-                          # criando caixa de selecao de estados
-                          selectInput(inputId = 'cases_state',
-                                      label = 'State:',
-                                      choices = estados_casos_obitos, # precisa ser um vetor com valores unicos
-                                      selected = 'RJ'),
-                          
-                          # criando caixa de selecao de cidades
-                          # selectInput(inputId = 'cases_city',
-                          #             label = 'City:',
-                          #             choices = NULL),
-                          
-                          # criando caixa para cálculo com ou sem média móvel
-                          selectInput(inputId = 'cases_mean',
-                                      label = 'Plot the Moving Average',
-                                      choices = list('No' = 'withoutmean',
-                                                     'Yes (display the Moving Average only)' = 'withmean',
-                                                     'Yes (display both)' = 'both'),
-                                      selected = 'withoutmean'),
-                          
-                          # criando caixa de selecao de periodos de media movel
-                          # a caixa começa escondida quando o app é iniciado
-                          hidden(sliderInput(inputId = 'cases_MA_size',
-                                             label = 'Period:',
-                                             min = 1,
-                                             max = 14,
-                                             value = 7)),
-                          
-                          # criando a referência aos dados
-                          h6('Source: W. Cota, “Monitoring the number of COVID-19 cases and deaths in brazil at municipal and federative units level”, SciELOPreprints:362 (2020), 10.1590/scielopreprints.362',
-                             style='margin-top:0px;'),
-                          
-                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
+                      tabsetPanel(
+                        tabPanel(
+                          title = "Overview",
+                          sidebarLayout(
+                            # criando barra lateral para inputar dados
+                            sidebarPanel(
+                              useShinyjs(),
+                              
+                              # criando caixa de selecao de variavel plotada
+                              varSelectInput(inputId = 'cases_metric',
+                                             label = 'Metric:',
+                                             data = casos_colunas, 
+                                             selected = 'New cases',
+                                             multiple = TRUE),
+                              
+                              # criando caixa de intervalo temporal
+                              dateRangeInput(inputId = 'cases_date',
+                                             label = 'Tracking date (dd/mm/yy):',
+                                             start = max(cases_Brazil$date) - months(1),
+                                             end = max(cases_Brazil$date),
+                                             format = 'dd/mm/yy'),
+                              
+                              # criando botão de escolha de agrupamento
+                              # radioGroupButtons(inputId = 'cases_groupby',
+                              #                   label = 'Group by:', 
+                              #                   choices = list('State' = 'state',
+                              #                                  'City' = 'city'),
+                              #                   status = 'primary'),
+                              
+                              # criando caixa de selecao de estados
+                              selectInput(inputId = 'cases_state',
+                                          label = 'State:',
+                                          choices = estados_casos_obitos, # precisa ser um vetor com valores unicos
+                                          selected = 'RJ'),
+                              
+                              # criando caixa de selecao de cidades
+                              # selectInput(inputId = 'cases_city',
+                              #             label = 'City:',
+                              #             choices = NULL),
+                              
+                              # criando caixa para cálculo com ou sem média móvel
+                              selectInput(inputId = 'cases_mean',
+                                          label = 'Plot the Moving Average',
+                                          choices = list('No' = 'withoutmean',
+                                                         'Yes (display the Moving Average only)' = 'withmean',
+                                                         'Yes (display both)' = 'both'),
+                                          selected = 'withoutmean'),
+                              
+                              # criando caixa de selecao de periodos de media movel
+                              # a caixa começa escondida quando o app é iniciado
+                              hidden(sliderInput(inputId = 'cases_MA_size',
+                                                 label = 'Period:',
+                                                 min = 1,
+                                                 max = 14,
+                                                 value = 7)),
+                              
+                              # criando a referência aos dados
+                              h6('Source: W. Cota, “Monitoring the number of COVID-19 cases and deaths in brazil at municipal and federative units level”, SciELOPreprints:362 (2020), 10.1590/scielopreprints.362',
+                                 style='margin-top:0px;'),
+                              
+                              tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
+                            ),
+                            
+                            
+                            # painel principal para apresentar outputs
+                            mainPanel(dygraphOutput(outputId = 'cases_plot'))
+                          ),
                         ),
-                        
-                        
-                        # painel principal para apresentar outputs
-                        mainPanel(dygraphOutput(outputId = 'cases_plot'),
-                                  
-                        br(),
-                        
-                        DT::dataTableOutput("table_out_cases"))
-                        
-                      ),
-                      
-                      
-                      # painel principal para apresentar outputs
-                      mainPanel(br(),
+                          
+                          tabPanel(
+                            title = "Geo Heat Maps",
+                              mainPanel(
+                                fluidRow(
+                                useShinyjs(),
                                 
-                                width = 11, 
-                                style='margin-left:4%; margin-right:4%',
                                 
-                                introBox(  
-                                  fluidRow(column(12,
-                                                  h3('Geographical visualization of data by state/city on sociodemographic aspects and on confirmed cases of COVID-19 in Brazil', 
-                                                     style='margin-top:0px;')))
-                                ),
+                                splitLayout(cellWidths = c('50%', '50%'),
+                                            # criando filtro de data
+                                            sliderInput(inputId = 'cases_date2',
+                                                        'Date:',
+                                                        min = as.Date(min(cases_Brazil$date),'%Y-%m-%d'),
+                                                        max = as.Date(max(cases_Brazil$date),'%Y-%m-%d'),
+                                                        value=as.Date(max(cases_Brazil$date)),
+                                                        animate=animationOptions(interval = 700, loop = FALSE),
+                                                        timeFormat='%d-%m-%Y')),
                                 
-                                br()
-                      ),
-                      
-                      mainPanel(
-                        fluidRow(
-                          useShinyjs(),
-                          
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      # criando filtro de data
-                                      sliderInput(inputId = 'cases_date2',
-                                                  'Date:',
-                                                  min = as.Date(min(cases_Brazil$date),'%Y-%m-%d'),
-                                                  max = as.Date(max(cases_Brazil$date),'%Y-%m-%d'),
-                                                  value=as.Date(max(cases_Brazil$date)),
-                                                  animate=animationOptions(interval = 700, loop = FALSE),
-                                                  timeFormat='%d-%m-%Y')),
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      # criando caixa de selecao de variavel plotada
-                                      varSelectInput(inputId = 'cases_metric2',
-                                                     label = 'Select a metric (state-level):',
-                                                     data = casos_colunas, 
-                                                     selected = 'None',
-                                                     multiple = FALSE,
-                                                     selectize = FALSE,
-                                                     size = 3),
-                                      
-                                      # criando caixa de selecao de variavel plotada
-                                      varSelectInput(inputId = 'demographic_metric1',
-                                                     label = 'Select a metric (city-level):',
-                                                     data = sociodem_colunas, 
-                                                     selected = 'None',
-                                                     multiple = FALSE,
-                                                     selectize = FALSE,
-                                                     size = 3,
-                                                     width = '110%')),
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      plotOutput(outputId = 'cases_map'),
-                                      
-                                      plotOutput(outputId = 'demographic_map1'))
-                        )
-                      )
-                      
+                                splitLayout(cellWidths = c('50%', '50%'),
+                                            # criando caixa de selecao de variavel plotada
+                                            varSelectInput(inputId = 'cases_metric2',
+                                                           label = 'Select a metric (state-level):',
+                                                           data = casos_colunas, 
+                                                           selected = 'None',
+                                                           multiple = FALSE,
+                                                           selectize = FALSE,
+                                                           size = 3),
+                                            
+                                            # criando caixa de selecao de variavel plotada
+                                            varSelectInput(inputId = 'demographic_metric1',
+                                                           label = 'Select a metric (city-level):',
+                                                           data = sociodem_colunas, 
+                                                           selected = 'None',
+                                                           multiple = FALSE,
+                                                           selectize = FALSE,
+                                                           size = 3,
+                                                           width = '110%')),
+                                
+                                splitLayout(cellWidths = c('50%', '50%'),
+                                            plotOutput(outputId = 'cases_map'),
+                                            
+                                            plotOutput(outputId = 'demographic_map1'))
+                              )
+                              )
+                            ),
+                              
+                              
+                              tabPanel(
+                                title = "Download Data",
+                                DT::dataTableOutput("table_out_cases")
+                              )
+                            )
              ),
              
              
              tabPanel('Deaths',
-                      mainPanel(width = 11, 
-                                style='margin-left:4%; margin-right:4%',
-                                introBox(  
-                                  fluidRow(column(12,
-                                                  h3('Explore the data on confirmed COVID-19 deaths for Brazil', 
-                                                     style='margin-top:0px;')))
-                                ),
-                                
-                                br()
-                                
-                      ),
-                      
-                      sidebarLayout(
-                        # criando barra lateral para inputar dados
-                        sidebarPanel(
-                          useShinyjs(),
-                          
-                          # criando caixa de selecao de variavel plotada
-                          varSelectInput(inputId = 'deaths_metric',
-                                         label = 'Metric:',
-                                         data = obitos_colunas, 
-                                         selected = 'Recent deaths registered',
-                                         multiple = TRUE),
-                          
-                          # criando caixa de intervalo temporal
-                          dateRangeInput(inputId = 'deaths_date',
-                                         label = 'Tracking date (dd/mm/yy)',
-                                         start = max(deaths_Brazil$date)- months(1),
-                                         end = max(deaths_Brazil$date),
-                                         format = 'dd/mm/yy'),
-                          
-                          # criando botão de escolha de agrupamento
-                          # radioGroupButtons(inputId = 'deaths_groupby',
-                          #                   label = 'Group by:', 
-                          #                   choices = list('State' = 'state',
-                          #                                  'City' = 'city'),
-                          #                   status = 'primary'),
-                          
-                          # criando caixa de selecao de estados
-                          selectInput(inputId = 'deaths_state',
-                                      label = 'State:',
-                                      choices = estados_casos_obitos, # precisa ser um vetor com valores unicos
-                                      selected = 'RJ'),
-                          
-                          # criando caixa de selecao de cidades
-                          # selectInput(inputId = 'deaths_city',
-                          #             label = 'City:',
-                          #             choices = NULL),
-                          
-                          # criando caixa para cálculo com ou sem média móvel
-                          selectInput(inputId = 'deaths_mean',
-                                      label = 'Plot the Moving Average',
-                                      choices = list('No' = 'withoutmean',
-                                                     'Yes (display the Moving Average only)' = 'withmean',
-                                                     'Yes (display both)' = 'both'),
-                                      selected = 'withoutmean'),
-                          
-                          # criando caixa de selecao de periodos de media movel
-                          # a caixa começa escondida quando o app é iniciado
-                          hidden(sliderInput(inputId = 'deaths_MA_size',
-                                             label = 'Period:',
-                                             min = 1,
-                                             max = 14,
-                                             value = 7)),
-                          
-                          # criando a referência aos dados
-                          h6('Source: W. Cota, “Monitoring the number of COVID-19 cases and deaths in brazil at municipal and federative units level”, SciELOPreprints:362 (2020), 10.1590/scielopreprints.362',
-                             style='margin-top:0px;'),
-                          
-                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
+                      tabsetPanel(
+                        tabPanel(
+                          title = "Overview",
+                          sidebarLayout(
+                            # criando barra lateral para inputar dados
+                            sidebarPanel(
+                              useShinyjs(),
+                              
+                              # criando caixa de selecao de variavel plotada
+                              varSelectInput(inputId = 'deaths_metric',
+                                             label = 'Metric:',
+                                             data = obitos_colunas, 
+                                             selected = 'Recent deaths registered',
+                                             multiple = TRUE),
+                              
+                              # criando caixa de intervalo temporal
+                              dateRangeInput(inputId = 'deaths_date',
+                                             label = 'Tracking date (dd/mm/yy)',
+                                             start = max(deaths_Brazil$date)- months(1),
+                                             end = max(deaths_Brazil$date),
+                                             format = 'dd/mm/yy'),
+                              
+                              # criando botão de escolha de agrupamento
+                              # radioGroupButtons(inputId = 'deaths_groupby',
+                              #                   label = 'Group by:', 
+                              #                   choices = list('State' = 'state',
+                              #                                  'City' = 'city'),
+                              #                   status = 'primary'),
+                              
+                              # criando caixa de selecao de estados
+                              selectInput(inputId = 'deaths_state',
+                                          label = 'State:',
+                                          choices = estados_casos_obitos, # precisa ser um vetor com valores unicos
+                                          selected = 'RJ'),
+                              
+                              # criando caixa de selecao de cidades
+                              # selectInput(inputId = 'deaths_city',
+                              #             label = 'City:',
+                              #             choices = NULL),
+                              
+                              # criando caixa para cálculo com ou sem média móvel
+                              selectInput(inputId = 'deaths_mean',
+                                          label = 'Plot the Moving Average',
+                                          choices = list('No' = 'withoutmean',
+                                                         'Yes (display the Moving Average only)' = 'withmean',
+                                                         'Yes (display both)' = 'both'),
+                                          selected = 'withoutmean'),
+                              
+                              # criando caixa de selecao de periodos de media movel
+                              # a caixa começa escondida quando o app é iniciado
+                              hidden(sliderInput(inputId = 'deaths_MA_size',
+                                                 label = 'Period:',
+                                                 min = 1,
+                                                 max = 14,
+                                                 value = 7)),
+                              
+                              # criando a referência aos dados
+                              h6('Source: W. Cota, “Monitoring the number of COVID-19 cases and deaths in brazil at municipal and federative units level”, SciELOPreprints:362 (2020), 10.1590/scielopreprints.362',
+                                 style='margin-top:0px;'),
+                              
+                              tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
+                            ),
+                            
+                            # painel principal para apresentar outputs 
+                            mainPanel(dygraphOutput(outputId = 'deaths_plot'))
+                          ),
                         ),
                         
-                        # painel principal para apresentar outputs 
-                        mainPanel(dygraphOutput(outputId = 'deaths_plot'),
-                                  
-                                  br(),
-                                  
-                                  DT::dataTableOutput("table_out_deaths"))
+                        tabPanel(
+                          title = "Geo Heat Maps",
+                          mainPanel(
+                            fluidRow(
+                            useShinyjs(),
+                            
+                            
+                            splitLayout(cellWidths = c('50%', '50%'),
+                                        # criando filtro de data
+                                        sliderInput(inputId = 'deaths_date2',
+                                                    'Arraste para selecionar a data:',
+                                                    min = as.Date(min(deaths_Brazil$date),'%Y-%m-%d'),
+                                                    max = as.Date(max(deaths_Brazil$date),'%Y-%m-%d'),
+                                                    value=as.Date(max(deaths_Brazil$date)),
+                                                    animate=animationOptions(interval = 700, loop = FALSE),
+                                                    timeFormat='%d-%m-%Y')),
+                            
+                            splitLayout(cellWidths = c('50%', '50%'),
+                                        # criando caixa de selecao de variavel plotada
+                                        varSelectInput(inputId = 'deaths_metric2',
+                                                       label = 'Select a metric (state-level):',
+                                                       data = obitos_colunas, 
+                                                       selected = 'None',
+                                                       multiple = FALSE,
+                                                       selectize = FALSE,
+                                                       size = 3),
+                                        
+                                        # criando caixa de selecao de variavel plotada
+                                        varSelectInput(inputId = 'demographic_metric2',
+                                                       label = 'Select a metric (city-level):',
+                                                       data = sociodem_colunas, 
+                                                       selected = 'None',
+                                                       multiple = FALSE,
+                                                       selectize = FALSE,
+                                                       size = 3,
+                                                       width = '110%')),
+                            
+                            splitLayout(cellWidths = c('50%', '50%'),
+                                        plotOutput(outputId = 'deaths_map'),
+                                        
+                                        plotOutput(outputId = 'demographic_map2'))
+                          )
+                          )
+                          
+                        ),
                         
-                      ),
-                      
-                      mainPanel(width = 11, 
-                                style='margin-left:4%; margin-right:4%',
-                                br(),
-                                
-                                introBox(  
-                                  fluidRow(column(12,
-                                                  h3('Geographical visualization of data by state/city on sociodemographic aspects and on confirmed deaths of COVID-19 in Brazil', 
-                                                     style='margin-top:0px;')))
-                                ),
-                                
-                                br()
-                                
-                      ),
-                      
-                      mainPanel(
-                        fluidRow(
-                          useShinyjs(),
-                          
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      # criando filtro de data
-                                      sliderInput(inputId = 'deaths_date2',
-                                                  'Arraste para selecionar a data:',
-                                                  min = as.Date(min(deaths_Brazil$date),'%Y-%m-%d'),
-                                                  max = as.Date(max(deaths_Brazil$date),'%Y-%m-%d'),
-                                                  value=as.Date(max(deaths_Brazil$date)),
-                                                  animate=animationOptions(interval = 700, loop = FALSE),
-                                                  timeFormat='%d-%m-%Y')),
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      # criando caixa de selecao de variavel plotada
-                                      varSelectInput(inputId = 'deaths_metric2',
-                                                     label = 'Select a metric (state-level):',
-                                                     data = obitos_colunas, 
-                                                     selected = 'None',
-                                                     multiple = FALSE,
-                                                     selectize = FALSE,
-                                                     size = 3),
-                                      
-                                      # criando caixa de selecao de variavel plotada
-                                      varSelectInput(inputId = 'demographic_metric2',
-                                                     label = 'Select a metric (city-level):',
-                                                     data = sociodem_colunas, 
-                                                     selected = 'None',
-                                                     multiple = FALSE,
-                                                     selectize = FALSE,
-                                                     size = 3,
-                                                     width = '110%')),
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      plotOutput(outputId = 'deaths_map'),
-                                      
-                                      plotOutput(outputId = 'demographic_map2'))
+                        
+                        tabPanel(
+                          title = "Download Data",
+                          DT::dataTableOutput("table_out_deaths")
                         )
                       )
                       
              ),
+         
              
              tabPanel('Hospitalizations',
                       menuItem('Source code', icon = icon('file-code-o'), 
@@ -387,178 +352,138 @@ ui <- fluidPage(
                       
              ),
              
-   tabPanel('Vaccinations',
-                      mainPanel(width = 11, 
-                                style='margin-left:4%; margin-right:4%',
-                                introBox(  
-                                  fluidRow(column(12,
-                                                  h3('Explore data on COVID-19 vaccine uptake and immunization coverage over time in Brazil', 
-                                                     style='margin-top:0px;')))
-                                ),
-                                
-                                br()
-                                
-                      ),
-                      
-                      sidebarLayout(
-                        # criando barra lateral para inputar dados
-                        sidebarPanel(
-                          useShinyjs(),
-                          
-                          # criando caixa de selecao de variavel plotada
-                          varSelectInput(inputId = 'vaccination_metric',
-                                         label = 'Metric:',
-                                         data = vacinacao_colunas, 
-                                         selected = '1st dose vaccinations (except Johnson & Johnson/Janssen)',
-                                         multiple = TRUE),
-                          
-                          # criando caixa de intervalo temporal
-                          dateRangeInput(inputId = 'vaccination_date',
-                                         label = 'Tracking date (dd/mm/yy):',
-                                         start = max(vaccination_Brazil$date) - months(1),
-                                         end = max(vaccination_Brazil$date),
-                                         format = 'dd/mm/yy'),
-                          
-                          # criando caixa de selecao de estados
-                          selectInput(inputId = 'vaccination_state',
-                                      label = 'State:',
-                                      choices = estados_vacinacao, # precisa ser um vetor com valores unicos
-                                      selected = 'RJ'),
-                          
-                          # criando a referência aos dados
-                          h6('Source: W. Cota, “Monitoring the number of COVID-19 cases and deaths in brazil at municipal and federative units level”, SciELOPreprints:362 (2020), 10.1590/scielopreprints.362',
-                             style='margin-top:0px;'),
-                          
-                          tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
+             tabPanel('Vaccinations',
+                      tabsetPanel(
+                        tabPanel(
+                          title = "Overview",
+                          sidebarLayout(
+                            # criando barra lateral para inputar dados
+                            sidebarPanel(
+                              useShinyjs(),
+                              
+                              # criando caixa de selecao de variavel plotada
+                              varSelectInput(inputId = 'vaccination_metric',
+                                             label = 'Metric:',
+                                             data = vacinacao_colunas, 
+                                             selected = 'People fully vaccinated',
+                                             multiple = TRUE),
+                              
+                              # criando caixa de intervalo temporal
+                              dateRangeInput(inputId = 'vaccination_date',
+                                             label = 'Tracking date (dd/mm/yy):',
+                                             start = max(vaccination_Brazil$date) - months(1),
+                                             end = max(vaccination_Brazil$date),
+                                             format = 'dd/mm/yy'),
+                              
+                              # criando caixa de selecao de estados
+                              selectInput(inputId = 'vaccination_state',
+                                          label = 'State:',
+                                          choices = estados_vacinacao, # precisa ser um vetor com valores unicos
+                                          selected = 'RJ'),
+                              
+                              # criando a referência aos dados
+                              h6('Source: W. Cota, “Monitoring the number of COVID-19 cases and deaths in brazil at municipal and federative units level”, SciELOPreprints:362 (2020), 10.1590/scielopreprints.362',
+                                 style='margin-top:0px;'),
+                              
+                              tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
+                              
+                            ),
+                            
+                            
+                            # painel principal para apresentar outputs
+                            mainPanel(dygraphOutput(outputId = 'vaccination_plot'))
+                          ),
+                        ),
+                        
+                        tabPanel(
+                          title = "Statistics", 
+                          sidebarLayout(
+                            # criando barra lateral para inputar dados para o gráfico estatísticas de vacinação
+                            sidebarPanel(
+                              useShinyjs(),
+                              
+                              
+                              # criando caixa de selecao de estados
+                              selectInput(inputId = 'vaccination_state_statistics',
+                                          label = 'States:',
+                                          choices = Brazil_Populations$state, # precisa ser um vetor com valores unicos
+                                          selected = list('SP','PI','MS','MG','CE','RS','ES','PR','RJ'),
+                                          multiple = TRUE),
+                              
+                              # criando filtro de data
+                              sliderInput(inputId = 'vaccination_date_statistics',
+                                          'Tracking Date:',
+                                          min = as.Date("2021-06-30",'%Y-%m-%d'),
+                                          max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
+                                          value=as.Date(max(vaccination_Brazil$date)),
+                                          animate=animationOptions(interval = 400, loop = FALSE),
+                                          timeFormat='%d-%m-%Y')
+                            ),
+                            
+                            
+                            mainPanel(
+                              plotlyOutput("graph_1"),
+                              
+                              br(),
+                              
+                              plotlyOutput("graph_2"))
+                          )
+                        ),
+                        
+                        
+                        
+                        tabPanel(
+                          title = "Geo Heat Maps",
+                          mainPanel(
+                            fluidRow(
+                              useShinyjs(),
+                              
+                              
+                              splitLayout(cellWidths = c('50%', '50%'),
+                                          # criando filtro de data
+                                          sliderInput(inputId = 'vaccination_date2',
+                                                      'Date:',
+                                                      min = as.Date(min(vaccination_Brazil$date),'%Y-%m-%d'),
+                                                      max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
+                                                      value=as.Date(max(vaccination_Brazil$date)),
+                                                      animate=animationOptions(interval = 700, loop = FALSE),
+                                                      timeFormat='%d-%m-%Y')),
+                              
+                              splitLayout(cellWidths = c('50%', '50%'),
+                                          # criando caixa de selecao de variavel plotada
+                                          varSelectInput(inputId = 'vaccination_metric2',
+                                                         label = 'Metric (state-level):',
+                                                         data = vacinacao_colunas, 
+                                                         selected = 'People fully vaccinated',
+                                                         multiple = FALSE,
+                                                         selectize = FALSE,
+                                                         size = 3),
+                                          
+                                          # criando caixa de selecao de variavel plotada
+                                          varSelectInput(inputId = 'demographic_metric4',
+                                                         label = 'Metric (city-level):',
+                                                         data = sociodem_colunas, 
+                                                         selected = 'Per capita GDP',
+                                                         multiple = FALSE,
+                                                         selectize = FALSE,
+                                                         size = 3,
+                                                         width = '110%')),
+                              
+                              splitLayout(cellWidths = c('50%', '50%'),
+                                          plotOutput(outputId = 'vaccination_map'),
+                                          
+                                          plotOutput(outputId = 'demographic_map4'))
+                            )
+                          )
                           
                         ),
-  
                         
-                        # painel principal para apresentar outputs
-                        mainPanel(dygraphOutput(outputId = 'vaccination_plot'),
-                                  
-                                  br(),
-                                  br(),
-                                  
-                                  DT::dataTableOutput("table_out_vaccination")
-                                  
-                        )
-                                  
-                                  
                         
-                      ),
-                      
-                      mainPanel(width = 11, 
-                                style='margin-left:4%; margin-right:4%',
-                                br(),
-                                br(),
-                                
-                                introBox(  
-                                  fluidRow(column(12,
-                                                  h3('Vaccination Numbers and Statistics', 
-                                                     style='margin-top:0px;')))
-                                ),
-                                
-                                br()
-                                
-                                
-                                
-                      ),
-                      
-                      sidebarLayout(
-                        # criando barra lateral para inputar dados para o gráfico estatísticas de vacinação
-                        sidebarPanel(
-                          useShinyjs(),
-                          
-                          
-                          # criando caixa de selecao de estados
-                          selectInput(inputId = 'vaccination_state_statistics',
-                                      label = 'States:',
-                                      choices = Brazil_Populations$state, # precisa ser um vetor com valores unicos
-                                      selected = list('SP','PI','MS','MG','CE','RS','ES','PR','RJ'),
-                                      multiple = TRUE),
-                        
-                        # criando filtro de data
-                        sliderInput(inputId = 'vaccination_date_statistics',
-                                    'Tracking Date:',
-                                    min = as.Date("2021-06-30",'%Y-%m-%d'),
-                                    max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
-                                    value=as.Date(max(vaccination_Brazil$date)),
-                                    animate=animationOptions(interval = 400, loop = FALSE),
-                                    timeFormat='%d-%m-%Y')
-                        ),
-                      
-                      
-                      mainPanel(
-                        plotlyOutput("graph_1"),
-                        
-                        br(),
-                        
-                        plotlyOutput("graph_2"))
-                      ),
-                      
-                      
-                      mainPanel(width = 11, 
-                                style='margin-left:4%; margin-right:4%',
-                                br(),
-                                br(),
-                                
-                                introBox(  
-                                  fluidRow(column(12,
-                                                  h3('Geographical visualization of data by state/city on sociodemographic aspects and on vaccine uptake and immunization coverage of COVID-19 in Brazil', 
-                                                     style='margin-top:0px;')))
-                                ),
-                                
-                                br()
-                                
-                                
-                                
-                      ),
-                      
-                      
-                      
-                      mainPanel(
-                        fluidRow(
-                          useShinyjs(),
-                          
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      # criando filtro de data
-                                      sliderInput(inputId = 'vaccination_date2',
-                                                  'Date:',
-                                                  min = as.Date(min(vaccination_Brazil$date),'%Y-%m-%d'),
-                                                  max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
-                                                  value=as.Date(max(vaccination_Brazil$date)),
-                                                  animate=animationOptions(interval = 700, loop = FALSE),
-                                                  timeFormat='%d-%m-%Y')),
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      # criando caixa de selecao de variavel plotada
-                                      varSelectInput(inputId = 'vaccination_metric2',
-                                                     label = 'Metric (state-level):',
-                                                     data = vacinacao_colunas, 
-                                                     selected = '1st dose vaccinations (except Johnson & Johnson/Janssen)',
-                                                     multiple = FALSE,
-                                                     selectize = FALSE,
-                                                     size = 3),
-                                      
-                                      # criando caixa de selecao de variavel plotada
-                                      varSelectInput(inputId = 'demographic_metric4',
-                                                     label = 'Metric (city-level):',
-                                                     data = sociodem_colunas, 
-                                                     selected = 'Per capita GDP',
-                                                     multiple = FALSE,
-                                                     selectize = FALSE,
-                                                     size = 3,
-                                                     width = '110%')),
-                          
-                          splitLayout(cellWidths = c('50%', '50%'),
-                                      plotOutput(outputId = 'vaccination_map'),
-                                      
-                                      plotOutput(outputId = 'demographic_map4'))
+                        tabPanel(
+                          title = "Download Data",
+                          DT::dataTableOutput("table_out_vaccination")
                         )
                       )
-                      
                       
              ),
              
