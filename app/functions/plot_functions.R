@@ -15,6 +15,18 @@ create_dygraph <- function(df, input_metric) {
 }
 
 
+# função para criação de gráfico com plotly
+create_plotly <- function(df, input_metric) {
+  
+  plot_ly() %>%
+    add_lines(data = df,
+              x = ~date,
+              y = ~df[[as.name(input_metric[[1]])]]) %>%
+    layout(yaxis = list(title = input_metric))
+  
+}
+
+
 
 # função para criação de mapa com variáveis de COVID
 create_covid_map <- function(df, input_date, input_metric) {
@@ -73,3 +85,4 @@ create_sociodem_map <- function(metric){
   
   return(plot_map)
 }
+

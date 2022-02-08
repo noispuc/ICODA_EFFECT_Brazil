@@ -29,7 +29,7 @@ server  <- function(input, output, session)({
   
   variaveis <- reactive({ get(input$cases_metric) })
   
-  create_cases_dygraph <- reactive({validate(up_two(input$cases_metric, input$cases_mean))
+  create_cases_plotly <- reactive({validate(up_two(input$cases_metric, input$cases_mean))
     
     filtered <- filter(cases_Brazil,
                        state == input$cases_state,
@@ -52,12 +52,12 @@ server  <- function(input, output, session)({
     }
     
     
-    create_dygraph(series, input$cases_metric)
+    create_plotly(filtered, input$cases_metric)
     
   })
   
-  # dygraph de casos
-  output$cases_plot <- renderDygraph({create_cases_dygraph()})
+  # plotly de casos
+  output$cases_plot <- renderPlotly({create_cases_plotly()})
   
   #botão de download de casos
   
@@ -92,7 +92,7 @@ server  <- function(input, output, session)({
   
   variaveis <- reactive({ get(input$deaths_metric) })
   
-  create_deaths_dygraph <- reactive({validate(up_two(input$deaths_metric, input$deaths_mean))
+  create_deaths_plotly <- reactive({validate(up_two(input$deaths_metric, input$deaths_mean))
     
     filtered <- filter(deaths_Brazil,
                        state == input$deaths_state,
@@ -115,16 +115,16 @@ server  <- function(input, output, session)({
     }
     
     
-    create_dygraph(series, input$deaths_metric)
+    create_plotly(filtered, input$deaths_metric)
     
     
   })
   
-  # dygraph de óbitos
-  output$deaths_plot <- renderDygraph({create_deaths_dygraph()})
+  # plotly de óbitos
+  output$deaths_plot <- renderPlotly({create_deaths_plotly()})
+  
   
   #botão de download de óbitos
-  
   output$table_out_deaths  <- DT::renderDataTable(
     datatable(
       deaths_Brazil,
@@ -155,25 +155,21 @@ server  <- function(input, output, session)({
   
   variaveis <- reactive({ get(input$vaccination_metric) })
   
-  create_vaccination_dygraph <- reactive({
+  create_vaccination_plotly <- reactive({
     
     filtered <- filter(vaccination_Brazil,
                        state == input$vaccination_state,
                        date <= max(input$vaccination_date),
                        date >= min(input$vaccination_date))
     
-    
-    series <- xts(select(filtered,!!!input$vaccination_metric),
-                  order.by = as.Date(filtered$date))
-    
-    
-    create_dygraph(series, input$vaccination_metric)
+    create_plotly(filtered, input$vaccination_metric)
     
     
   })
   
-  # dygraph de vacinação
-  output$vaccination_plot <- renderDygraph({create_vaccination_dygraph()})
+  # plotly de vacinação
+  output$vaccination_plot <- renderPlotly({create_vaccination_plotly()})
+
   
   #botão de download de vacinação
   
