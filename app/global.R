@@ -38,12 +38,12 @@ library(rintrojs)
 library(shinyjs)
 library(lubridate)
 library(plotly)
-# library(geobr)
 library(sf)
 library(data.table)
 library(scales)
 library(lubridate)
 library(DT)
+library(rlang)
 
 
 # importando funções criadas

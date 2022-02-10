@@ -18,11 +18,33 @@ create_dygraph <- function(df, input_metric) {
 # função para criação de gráfico com plotly
 create_plotly <- function(df, input_metric) {
   
-  plot_ly() %>%
-    add_lines(data = df,
-              x = ~date,
-              y = ~df[[as.name(input_metric[[1]])]]) %>%
-    layout(yaxis = list(title = input_metric))
+  if(length(input_metric) == 1){# fluxo de plotar apenas 1 variável
+    plot_ly() %>%
+      add_lines(data = df,
+                x = ~date,
+                y = ~df[[as.name(input_metric[[1]])]],
+                yaxis = 'y1') %>%
+      layout(yaxis = list(title = as_name(input_metric[[1]]) ))
+  } else {# fluxo de plotar duas variaveis
+    plot_ly() %>%
+      add_lines(data = df,
+                x = ~date,
+                y = ~df[[as.name(input_metric[[1]])]],
+                name = as_name(input_metric[[1]]),
+                yaxis = 'y1') %>%
+      layout(yaxis = list(title = as_name(input_metric[[1]]) )) %>%
+      add_lines(data = df,
+                x = ~date,
+                y = ~df[[as.name(input_metric[[2]])]],
+                name = as_name(input_metric[[2]]),
+                yaxis = 'y2') %>%
+      layout(yaxis2 = list(overlaying = 'y',
+                           side = 'right',
+                           title = as_name(input_metric[[2]])))
+  }
+  
+  
+    
   
 }
 
