@@ -40,7 +40,8 @@ create_plotly <- function(df, input_metric) {
                 yaxis = 'y2') %>%
       layout(yaxis2 = list(overlaying = 'y',
                            side = 'right',
-                           title = as_name(input_metric[[2]])))
+                           title = as_name(input_metric[[2]]))) %>% 
+      layout(legend = list(y = 1, orientation = 'h'))
   }
   
   
