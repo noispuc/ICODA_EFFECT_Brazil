@@ -109,7 +109,7 @@ ui <- fluidPage(
                               
                               # criando caixa de intervalo temporal
                               dateRangeInput(inputId = 'cases_date',
-                                             label = 'Tracking date (dd/mm/yy):',
+                                             label = 'Date range (dd/mm/yy):',
                                              start = max(cases_Brazil$date) - months(1),
                                              end = max(cases_Brazil$date),
                                              format = 'dd/mm/yy'),
@@ -234,7 +234,7 @@ ui <- fluidPage(
                               
                               # criando caixa de intervalo temporal
                               dateRangeInput(inputId = 'deaths_date',
-                                             label = 'Tracking date (dd/mm/yy)',
+                                             label = 'Date range (dd/mm/yy)',
                                              start = max(deaths_Brazil$date)- months(1),
                                              end = max(deaths_Brazil$date),
                                              format = 'dd/mm/yy'),
@@ -371,7 +371,7 @@ ui <- fluidPage(
                               
                               # criando caixa de intervalo temporal
                               dateRangeInput(inputId = 'vaccination_date',
-                                             label = 'Tracking date (dd/mm/yy):',
+                                             label = 'Date range (dd/mm/yy):',
                                              start = max(vaccination_Brazil$date) - months(1),
                                              end = max(vaccination_Brazil$date),
                                              format = 'dd/mm/yy'),
@@ -413,7 +413,7 @@ ui <- fluidPage(
                               
                               # criando filtro de data
                               sliderInput(inputId = 'vaccination_date_statistics',
-                                          'Tracking Date:',
+                                          'Date range:',
                                           min = as.Date("2021-06-30",'%Y-%m-%d'),
                                           max = as.Date(max(vaccination_Brazil$date),'%Y-%m-%d'),
                                           value=as.Date(max(vaccination_Brazil$date)),
