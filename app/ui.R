@@ -142,6 +142,7 @@ ui <- fluidPage(
                               
                               # criando caixa de selecao de periodos de media movel
                               # a caixa começa escondida quando o app é iniciado
+                              useShinyjs(),
                               hidden(sliderInput(inputId = 'cases_MA_size',
                                                  label = 'Period:',
                                                  min = 1,
@@ -151,7 +152,7 @@ ui <- fluidPage(
                               # criando a referência aos dados
                               h6('Source: W. Cota, “Monitoring the number of COVID-19 cases and deaths in brazil at municipal and federative units level”, SciELOPreprints:362 (2020), 10.1590/scielopreprints.362',
                                  style='margin-top:0px;'),
-                              
+
                               tags$a(href="https://github.com/wcota/covid19br", "https://github.com/wcota/covid19br")
                             ),
                             
@@ -342,7 +343,7 @@ ui <- fluidPage(
          
              
              tabPanel('Hospitalizations',
-                      menuItem('Source code', icon = icon('file-code-o'), 
+                      menuItem('Source code', 
                                href = 'https://github.com/lslbastos/Bastos_Ranzani_etal_COVID19_ChangeWaves'),
                       fluidRow(
                         tags$iframe(

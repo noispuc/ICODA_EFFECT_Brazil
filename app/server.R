@@ -40,19 +40,25 @@ server  <- function(input, output, session)({
     series <- xts(select(filtered,!!!input$cases_metric),
                   order.by = as.Date(filtered$date))
     
+    
     if (input$cases_mean == 'withmean') {
       series <- rollmean(series, k = input$cases_MA_size, align  = 'right')
-      colnames(series) = paste(colnames(series), 'media_movel', sep = '_')
+      colnames(series) = paste(colnames(series), 'moving average', sep = ' ')
       observe(show('cases_MA_size'))
     } else if (input$cases_mean == 'both') {
       series_mean <- rollmean(series, k = input$cases_MA_size, align  = 'right')
-      colnames(series_mean) = paste(colnames(series_mean), 'media_movel', sep = '_')
+      colnames(series_mean) = paste(colnames(series_mean), 'moving average', sep = ' ')
       series <- cbind(series, series_mean)
       observe(show('cases_MA_size'))
     }
     
+    colnames(series) = gsub("\\.", " ", colnames(series)) # removendo o "." do nome das colunas
     
-    create_plotly(filtered, input$cases_metric)
+    series <- as.data.frame(series)
+    series <- rownames_to_column(series, 'date')
+    series$date <- as.Date(series$date)
+    
+    create_plotly(series, input$cases_metric)
     
   })
   
@@ -105,17 +111,22 @@ server  <- function(input, output, session)({
     
     if (input$deaths_mean == 'withmean') {
       series <- rollmean(series, k = input$deaths_MA_size, align  = 'right')
-      colnames(series) = paste(colnames(series), 'media_movel', sep = '_')
+      colnames(series) = paste(colnames(series), 'moving average', sep = ' ')
       observe(show('deaths_MA_size'))
     } else if (input$deaths_mean == 'both') {
       series_mean <- rollmean(series, k = input$deaths_MA_size, align  = 'right')
-      colnames(series_mean) = paste(colnames(series_mean), 'media_movel', sep = '_')
+      colnames(series_mean) = paste(colnames(series_mean), 'moving average', sep = ' ')
       series <- cbind(series, series_mean)
       observe(show('deaths_MA_size'))
     }
     
+    colnames(series) = gsub("\\.", " ", colnames(series)) # removendo o "." do nome das colunas
     
-    create_plotly(filtered, input$deaths_metric)
+    series <- as.data.frame(series)
+    series <- rownames_to_column(series, 'date')
+    series$date <- as.Date(series$date)
+    
+    create_plotly(series, input$deaths_metric)
     
     
   })

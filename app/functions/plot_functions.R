@@ -22,32 +22,31 @@ create_plotly <- function(df, input_metric) {
     plot_ly() %>%
       add_lines(data = df,
                 x = ~date,
-                y = ~df[[as.name(input_metric[[1]])]],
+                y = ~df[[colnames(df)[2]]],
                 yaxis = 'y1') %>%
-      layout(yaxis = list(title = as_name(input_metric[[1]]) ))
+      layout(yaxis = list(title = colnames(df)[2] ))
   } else {# fluxo de plotar duas variaveis
     plot_ly() %>%
+      # primeiro eixo
       add_lines(data = df,
                 x = ~date,
-                y = ~df[[as.name(input_metric[[1]])]],
-                name = as_name(input_metric[[1]]),
+                y = ~df[[colnames(df)[2]]],
+                name = colnames(df)[2],
                 yaxis = 'y1') %>%
-      layout(yaxis = list(title = as_name(input_metric[[1]]) )) %>%
+      layout(yaxis = list(title = colnames(df)[2] )) %>%
+      # segundo eixo
       add_lines(data = df,
                 x = ~date,
-                y = ~df[[as.name(input_metric[[2]])]],
-                name = as_name(input_metric[[2]]),
+                y = ~df[[colnames(df)[3]]],
+                name = colnames(df)[3],
                 yaxis = 'y2') %>%
       layout(yaxis2 = list(overlaying = 'y',
                            side = 'right',
-                           title = as_name(input_metric[[2]]))) %>% 
+                           title = colnames(df)[3] )) %>% 
       layout(legend = list(y = 1, 
                            orientation = 'h'),
              yaxis2 = list(showgrid = FALSE))
   }
-  
-  
-    
   
 }
 
