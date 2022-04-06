@@ -173,7 +173,17 @@ server  <- function(input, output, session)({
                        date <= max(input$vaccination_date),
                        date >= min(input$vaccination_date))
     
-    create_plotly(filtered, input$vaccination_metric)
+    series <- xts(select(filtered,!!!input$vaccination_metric),
+                  order.by = as.Date(filtered$date))
+    
+    colnames(series) = gsub("\\.", " ", colnames(series)) # removendo o "." do nome das colunas
+    
+    series <- as.data.frame(series)
+    series <- rownames_to_column(series, 'date')
+    series$date <- as.Date(series$date)
+
+    
+    create_plotly(series, input$vaccination_metric)
     
     
   })
