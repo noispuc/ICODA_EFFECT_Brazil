@@ -6,6 +6,7 @@ https://opendatasus.saude.gov.br/dataset/covid-19-vacinacao
 
 ### SRAG
 https://opendatasus.saude.gov.br/dataset/srag-2021-e-2022
+https://opendatasus.saude.gov.br/dataset/srag-2020
 
 ## OXFORD MEASURES
 
